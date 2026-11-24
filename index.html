@@ -92,14 +92,14 @@ th{color:var(--mute);font-weight:600}
 
 <aside id="panel">
  <div class="head">
-  <h1>Երևան · 3D երթևեկություն<small>Կենտրոն · Արաբկիր · Քանաքեռ-Զեյթուն · Մալաթիա-Սեբաստիա · Նոր Նորք · Նորք-Մարաշ</small></h1>
+  <h1>Երևան · 3D երթևեկություն<small>Երևանի 12 վարչական շրջան</small></h1>
   <button class="ib" id="minb" aria-label="Ծալել վահանակը">–</button>
  </div>
  <nav class="tabs" id="tabs">
   <button data-t="time" class="on">Ժամ</button>
   <button data-t="flow">Հոսք</button>
   <button data-t="bus">Գծեր</button>
-  <button data-t="pair">Զույգեր</button>
+  <button data-t="pair">A → B</button>
   <button data-t="view">Տեսք</button>
   <button data-t="data">Տվյալներ</button>
  </nav>
@@ -110,6 +110,7 @@ th{color:var(--mute);font-weight:600}
     <div class="row"><button class="btn on" id="play">❚❚ Դադար</button></div>
    </div>
    <div class="note" id="period">Առավոտյան պիկ</div>
+   <div class="note" id="nowcnt"></div>
    <h3>Սիմուլյացիայի արագություն</h3>
    <div class="row" id="speeds"></div>
    <h3>Օրվա ժամ</h3>
@@ -122,19 +123,21 @@ th{color:var(--mute);font-weight:600}
 
   <section class="sec" id="s-flow">
    <h3>Մեքենաների քանակը՝ զեկույցի ֆլոտից</h3>
-   <div class="ref" style="margin-top:0"><div class="r"><span>Գրանցված մեքենաներ, Երևան (01.09.2025)</span><b>343 220</b></div><div class="r"><span>Մարդատար՝ ≈88%</span><b>302 034</b></div><div class="r"><span>Մոդելում պիկին ճանապարհին</span><b id="fleetcalc">–</b></div></div>
+   <div class="ref" style="margin-top:0"><div class="r"><span>Գրանցված մեքենաներ, Երևան (01.09.2025)</span><b>343 220</b></div><div class="r"><span>Մարդատար՝ ≈88%</span><b id="fleet88">302 034</b></div><div class="r"><span>Մոդելում պիկին ճանապարհին</span><b id="fleetcalc">–</b></div></div>
+   <div class="sl"><label>Երևանում գրանցված մեքենաներ <b id="v-fleet">343,220</b></label><input type="range" id="fleet" min="343000" max="365000" step="1000" value="343220"></div>
+   <p class="note">Միջակայքը՝ 343–365 հազար. 343 220-ը զեկույցի պաշտոնական թիվն է (01.09.2025), վերին սահմանը՝ աճը ներառող գնահատական։</p>
    <div class="sl"><label>Ֆլոտի որ մասն է միաժամանակ ճանապարհին պիկին <b id="v-onroad">5%</b></label><input type="range" id="onroad" min="2" max="15" step=".5" value="5"></div>
-   <div class="sl"><label>Այդ հոսքի որ մասն է 6 շրջանում <b id="v-area">65%</b></label><input type="range" id="area" min="30" max="100" step="5" value="65"></div>
+   <div class="sl"><label>Այդ հոսքի որ մասն է քաղաքի ներսում (12 շրջան) <b id="v-area">95%</b></label><input type="range" id="area" min="30" max="100" step="5" value="95"></div>
    <p class="note">343 220-ը գրանցված մեքենաների թիվն է, ոչ թե միաժամանակ երթևեկողների (զեկույցի զգուշացումը)։ Երկու սահիչները մոդելային ենթադրություններ են. լռելյայն արժեքներով մոդելը մոտենում է զեկույցի արագություններին։</p>
    <h3>Ծանրաբեռնված փողոցներ</h3>
    <label class="tg"><input type="checkbox" id="hoton" checked> Միացնել ծանրաբեռնված փողոցները</label>
    <p class="note">Տերյան, Մոսկովյան, Խանջյան, Ալ. Մանուկյան, Սայաթ-Նովա, Նալբանդյան, Աբովյան, Չարենց, Իսակով, Սեբաստիա, Լենինգրադյան, Ծիծեռնակաբերդ, Օրբելի, Բաղրամյան, Մաշտոց–Խորենացի–Բեյրութ–Իտալիա–Արգիշտի, Տիգրան Մեծ, Կոմիտաս, Ամիրյան, Մյասնիկյան, Արշակունյաց։</p>
-   <div class="sl"><label>Մեքենաների որ մասն է այս փողոցներում <b id="v-hot">60%</b></label><input type="range" id="hot" min="0" max="85" step="5" value="60"></div>
+   <div class="sl"><label>Մեքենաների որ մասն է այս փողոցներում <b id="v-hot">45%</b></label><input type="range" id="hot" min="0" max="85" step="5" value="45"></div>
    <h3>Օր և իրադարձություն</h3>
    <div class="row" id="daytype"><button class="btn on" data-d="wd">Աշխատանքային օր<small>632 ավտոբուս · 81 միկրոավտ.</small></button><button class="btn" data-d="we">Հանգստյան օր<small>502 ավտոբուս · 61 միկրոավտ.</small></button></div>
    <label class="tg"><input type="checkbox" id="event"> 22.04.2026-ի խցանումը (08:00–08:30)՝ Իսակով, Սեբաստիա, Լենինգրադյան, Ծիծեռնակաբերդ, Օրբելի, Բաղրամյան</label>
    <h3>Հանրային տրանսպորտ և եզրային խոչընդոտներ</h3>
-   <div class="sl"><label>Աշխատող ՀՏ-ի որ մասն է 6 շրջանում <b id="v-pts">50%</b></label><input type="range" id="pts" min="10" max="100" step="5" value="50"></div>
+   <div class="sl"><label>Աշխատող ՀՏ-ի որ մասն է քարտեզում <b id="v-pts">90%</b></label><input type="range" id="pts" min="10" max="100" step="5" value="90"></div>
    <div class="sl"><label>Կրկնակի կայանված / կանգնած մեքենաներ <b id="v-dpark">60</b></label><input type="range" id="dpark" min="0" max="300" step="10" value="60"></div>
    <div class="sl"><label>Տաքսիների բաժինը <b id="v-tshare">15%</b></label><input type="range" id="tshare" min="0" max="50" step="1" value="15"></div>
    <h3>Արագություններ (առավելագույն)</h3>
@@ -159,8 +162,9 @@ th{color:var(--mute);font-weight:600}
    <div class="sl"><label>Ավտոբուսների միջակայք <b id="v-head">6 ր</b></label><input type="range" id="head" min="2" max="20" step="1" value="6"></div>
    <div class="sl"><label>Կանգառում կանգ <b id="v-dwell">12 վ</b></label><input type="range" id="dwell" min="0" max="60" step="1" value="12"></div>
    <h3>Լեգենդ</h3>
-   <div class="lg"><span class="sw" style="background:#1fa64a"></span>Գործող ավտոբուսային գիծ</div>
-   <div class="lg"><span class="sw" style="background:#7c5cff"></span>Նոր առաջարկվող ավտոբուսային գիծ</div>
+   <div class="lg"><span class="sw" style="background:#22e05e;box-shadow:0 0 6px #2bff6a"></span>Գործող ավտոբուսային գիծ (լուսավոր, երևում է նաև գիշերը)</div>
+   <div class="lg"><span class="sw" style="background:#9473ff;box-shadow:0 0 6px #a98bff"></span>Նոր առաջարկվող ավտոբուսային գիծ</div>
+   <div class="lg"><span class="sw" style="background:#ffd21a"></span>Տաքսի ◆ <span class="sw" style="background:#2f7dff;margin-left:6px"></span>Ավտոբուս ◆ <span class="sw" style="background:#ff9f1a;margin-left:6px"></span>Միկրոավտ. ◆ <span class="sw" style="background:#19d6c0;margin-left:6px"></span>Տրոլեյբուս ◆ — նշիչներ վերևում, սովորական մեքենաները՝ մոխրագույն</div>
    <div class="lg"><span class="sw" style="background:#ffc233"></span>Դանդաղ 20–30 <span class="sw" style="background:#ff3b2f;margin-left:6px"></span>Ծանր 10–20 <span class="sw" style="background:#9b0016;margin-left:6px"></span>Կանգ &lt;10 կմ/ժ</div>
    <div class="lg"><span class="sw" style="background:#3f86e8"></span>Քաղ. ավտոբուս <span class="sw" style="background:#f0dc8a;margin-left:6px"></span>Միկրոավտ. <span class="sw" style="background:#19a596;margin-left:6px"></span>Տրոլեյբուս</div>
    <div class="lg"><span class="sw" style="background:#ff8a1c"></span>Կրկնակի կայանված / կանգնած մեքենա</div>
@@ -170,12 +174,16 @@ th{color:var(--mute);font-weight:600}
   </section>
 
   <section class="sec" id="s-pair">
+   <h3>Ընտրեք մեկնակետ և վերջնակետ</h3>
+   <p class="note">Սեղմեք կոճակը, ապա քարտեզի վրա՝ A (մեկնակետ) և B (վերջնակետ)։ Միաժամանակ դուրս կգան սովորական մեքենան (կարմիր, ամենակարճ ճանապարհով) և տաքսին (դեղին, ընտրում է ավտոբուսային գծերով ուղի)։</p>
+   <div class="row"><button class="btn red on" id="pick2" style="flex:1">📍 Ընտրել A → B քարտեզից</button></div>
+   <div class="note" id="pickmsg"></div>
+   <div id="est"></div>
    <h3>Զույգ՝ մեքենա ընդդեմ տաքսու</h3>
    <p class="note">Նույն պահին, նույն ճանապարհով մեկնարկում են կարմիր մեքենան (սովորական շարքեր) և դեղին տաքսին (կարող է օգտվել ավտոբուսի գծից և շրջանցել)։ Կարելի է ավելացնել նաև ավտոբուս։</p>
    <label class="tg"><input type="checkbox" id="withbus" checked> Ավելացնել ավտոբուս (կանգառներով)</label>
    <div id="pairroutes"></div>
-   <div class="row" style="margin-top:8px"><button class="btn" id="pick">Ընտրել քարտեզից (A → B)</button><button class="btn" id="clr">Մաքրել</button></div>
-   <div class="note" id="pickmsg"></div>
+   <div class="row" style="margin-top:8px"><button class="btn" id="pick" style="display:none">A → B</button><button class="btn" id="clr">Մաքրել</button></div>
    <h3>Արդյունքներ</h3>
    <div style="overflow-x:auto"><table id="res"><thead><tr><th>Ժամ · ուղի</th><th>Մեքենա</th><th>Տաքսի</th><th>Ավտ.</th><th>Շահում</th></tr></thead><tbody></tbody></table></div>
    <p class="note" id="avg"></p>
@@ -186,6 +194,7 @@ th{color:var(--mute);font-weight:600}
    <h3>Տեսախցիկ</h3>
    <div class="row" id="cams"></div>
    <h3>Շերտեր</h3>
+   <label class="tg"><input type="checkbox" id="l-acc" checked> Ընդգծել տաքսիներն ու հանրային տրանսպորտը (նշիչներ)</label>
    <label class="tg"><input type="checkbox" id="l-bld" checked> Շենքեր</label>
    <label class="tg"><input type="checkbox" id="l-cong" checked> Խցանումներ (կարմիր)</label>
    <label class="tg"><input type="checkbox" id="l-rt" checked> Երթուղիների գծեր</label>
@@ -230,7 +239,7 @@ const fmtT=s=>{s=Math.round(s);const m=Math.floor(s/60),x=s%60;return m+':'+Stri
 const clockStr=t=>{t=((t%86400)+86400)%86400;const h=Math.floor(t/3600),m=Math.floor(t%3600/60);return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')};
 
 // ---------- state / settings ----------
-const S={play:true,speed:10,t:8.5*3600,dens:9816,onroad:.05,hot:.6,hotStay:4,hotOn:true,area:.65,ptShare:.5,dpark:60,event:false,weekend:false,tshare:.15,vcar:60,vtaxi:65,vbus:50,aggr:7,park:true,sig:'fixed',scen:'prop',taxiBus:true,head:6,dwell:12,day24:false,withBus:true,follow:false};
+const S={play:true,speed:10,t:8.5*3600,dens:14000,fleet:343220,onroad:.05,hot:.45,hotStay:4,hotOn:true,area:.95,ptShare:.9,dpark:60,event:false,weekend:false,tshare:.15,vcar:60,vtaxi:65,vbus:50,aggr:7,park:true,sig:'fixed',scen:'prop',taxiBus:true,accent:true,head:6,dwell:12,day24:false,withBus:true,follow:false};
 const DEM=[.12,.08,.06,.06,.07,.12,.32,.62,1,.92,.66,.6,.62,.64,.62,.64,.8,1,1,.7,.5,.38,.26,.17]; // peaks 07:30–09:30, 17:00–19:00 (report §3.3)
 const demand=h=>{const a=Math.floor(h)%24,b=(a+1)%24,f=h-Math.floor(h);return DEM[a]*(1-f)+DEM[b]*f};
 const period=h=>h<6?'Ցածր հոսք (գիշեր)':h<7.5?'Աճող հոսք':h<9.5?'Առավոտյան պիկ':h<16.5?'Միջպիկային':h<19?'Երեկոյան պիկ':h<22?'Երեկոյան նվազում':'Ցածր հոսք (գիշեր)';
@@ -284,7 +293,7 @@ links.forEach(L=>{L.parkCand=L.cls>=1&&L.cls<=3&&L.n>=2&&hash(L.e*7+3)<.55;L.imp
 
 // district info
 const districts=net.districts.map(([n,p])=>{let cx=0,cz=0;p.forEach(q=>{cx+=q[0];cz+=q[1]});return{n,p,cx:cx/p.length,cz:cz/p.length}});
-const DN={'Kentron':'Կենտրոն','Arabkir':'Արաբկիր','Kanaker-Zeytun':'Քանաքեռ-Զեյթուն','Malatia-Sebastia':'Մալաթիա-Սեբաստիա','Nor Nork':'Նոր Նորք','Nork-Marash':'Նորք-Մարաշ'};
+const DN={'Kentron':'Կենտրոն','Arabkir':'Արաբկիր','Kanaker-Zeytun':'Քանաքեռ-Զեյթուն','Malatia-Sebastia':'Մալաթիա-Սեբաստիա','Nor Nork':'Նոր Նորք','Nork-Marash':'Նորք-Մարաշ','Shengavit':'Շենգավիթ','Erebuni':'Էրեբունի','Ajapnyak':'Աջափնյակ','Avan':'Ավան','Davtashen':'Դավթաշեն','Nubarashen':'Նուբարաշեն'};
 const inPoly=(x,z,p)=>{let c=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const a=p[i],b=p[j];if(((a[1]>z)!=(b[1]>z))&&(x<(b[0]-a[0])*(z-a[1])/(b[1]-a[1])+a[0]))c=!c}return c};
 links.forEach(L=>{const k=Math.floor(L.xs.length/2);L.urb=false;const x=(L.xs[k]+L.xs[Math.max(0,k-1)])/2,z=(L.zs[k]+L.zs[Math.max(0,k-1)])/2;L.dist=districts.findIndex(d=>inPoly(x,z,d.p));L.urb=L.dist>=0&&['Kentron','Nork-Marash'].includes(districts[L.dist].n)});
 
@@ -312,11 +321,11 @@ const canvas=$('c');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
 const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(45,1,4,40000);
+const camera=new THREE.PerspectiveCamera(45,1,4,60000);
 const flat=(m,o)=>{m.renderOrder=o;const ms=Array.isArray(m.material)?m.material:[m.material];ms.forEach(x=>{x.depthWrite=false;x.polygonOffset=true;x.polygonOffsetFactor=-o;x.polygonOffsetUnits=-o});return m};
 const hemi=new THREE.HemisphereLight(0xdfe8ff,0x4a3f38,.6);scene.add(hemi);
 const sun=new THREE.DirectionalLight(0xfff1dc,.6);scene.add(sun);
-scene.fog=new THREE.Fog(0xcfd7e0,6000,16000);
+scene.fog=new THREE.Fog(0xcfd7e0,9000,26000);
 
 // ground
 const ground=new THREE.Mesh(new THREE.PlaneGeometry(60000,60000),new THREE.MeshLambertMaterial({color:0xd2c8b9}));
@@ -353,23 +362,25 @@ const decode=s=>{const a=s.trim().split(' ').map(Number);const p=[[a[0],a[1]]];f
 
 // buildings
 const bldMesh=(()=>{
- const pos=[],col=[];const pal=[[.86,.62,.55],[.82,.58,.5],[.9,.7,.6],[.78,.55,.5],[.88,.75,.66],[.93,.85,.78],[.74,.6,.56]];
+ const pal=[[.86,.62,.55],[.82,.58,.5],[.9,.7,.6],[.78,.55,.5],[.88,.75,.66],[.93,.85,.78],[.74,.6,.56]];
+ const B=[];let nv=0,ni=0;
  for(const rec of bpart.split(';')){
   const i1=rec.indexOf(','),i2=rec.indexOf(',',i1+1);if(i2<0)continue;
   const h0=parseFloat(rec.slice(0,i1))||0,lv=parseFloat(rec.slice(i1+1,i2))||0;const p=decode(rec.slice(i2+1));if(p.length<3)continue;
-  let area=0;for(let i=0,j=p.length-1;i<p.length;j=i++)area+=(p[j][0]-p[i][0])*(p[j][1]+p[i][1]);area=Math.abs(area/2);
+  let sa=0;for(let i=0,j=p.length-1;i<p.length;j=i++)sa+=(p[j][0]-p[i][0])*(p[j][1]+p[i][1]);const area=Math.abs(sa/2);if(sa>0)p.reverse();
   const r=hash(Math.round(p[0][0]*31+p[0][1]*17));
   let h=h0||(lv?lv*3.1+1:area<45?3.2:area<150?6+r*6:area<600?12+r*14:16+r*22);h=Math.min(h,160);
-  const c=pal[Math.floor(r*pal.length)];const sh=.9+r*.15;
-  {let sa=0;for(let i=0,j=p.length-1;i<p.length;j=i++)sa+=(p[j][0]-p[i][0])*(p[j][1]+p[i][1]);if(sa>0)p.reverse()}
-  const v=p.map(q=>new THREE.Vector2(q[0],q[1]));let tr;try{tr=THREE.ShapeUtils.triangulateShape(v,[])}catch(e){continue}
-  const rc=[c[0]*.8*sh,c[1]*.78*sh,c[2]*.78*sh];
-  for(const t of tr){const a=p[t[0]],b=p[t[1]],c2=p[t[2]];const cr=(b[0]-a[0])*(c2[1]-a[1])-(b[1]-a[1])*(c2[0]-a[0]);const o=cr<0?[t[0],t[1],t[2]]:[t[0],t[2],t[1]];for(const j of o){pos.push(p[j][0],h,p[j][1]);col.push(...rc)}}
-  for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length];const wc=[c[0]*sh,c[1]*sh,c[2]*sh];
-   pos.push(a[0],0,a[1],b[0],0,b[1],b[0],h,b[1], a[0],0,a[1],b[0],h,b[1],a[0],h,a[1]);for(let k=0;k<6;k++)col.push(...wc)}
- }
- const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));g.computeVertexNormals();
- const m=new THREE.Mesh(g,new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.FrontSide}));scene.add(m);return m;
+  let tr;try{tr=THREE.ShapeUtils.triangulateShape(p.map(q=>new THREE.Vector2(q[0],q[1])),[])}catch(e){continue}
+  B.push([p,h,r,tr]);nv+=p.length*5;ni+=tr.length*3+p.length*6}
+ const pos=new Float32Array(nv*3),col=new Float32Array(nv*3),nor=new Float32Array(nv*3);const idx=nv>65000?new Uint32Array(ni):new Uint16Array(ni);let v=0,q=0;
+ for(const [p,h,r,tr] of B){const c=pal[Math.floor(r*pal.length)];const sh=.9+r*.15;const n=p.length;
+  const base=v;for(let k=0;k<n;k++){pos.set([p[k][0],h,p[k][1]],v*3);nor.set([0,1,0],v*3);col.set([c[0]*.8*sh,c[1]*.78*sh,c[2]*.78*sh],v*3);v++}
+  for(const t of tr){const a=p[t[0]],b=p[t[1]],c2=p[t[2]];const cr=(b[0]-a[0])*(c2[1]-a[1])-(b[1]-a[1])*(c2[0]-a[0]);if(cr<0){idx[q++]=base+t[0];idx[q++]=base+t[1];idx[q++]=base+t[2]}else{idx[q++]=base+t[0];idx[q++]=base+t[2];idx[q++]=base+t[1]}}
+  for(let k=0;k<n;k++){const a=p[k],b=p[(k+1)%n];let nx=b[1]-a[1],nz=-(b[0]-a[0]);const l=Math.hypot(nx,nz)||1;nx/=l;nz/=l;
+   const w=v;pos.set([a[0],0,a[1],b[0],0,b[1],b[0],h,b[1],a[0],h,a[1]],v*3);for(let j=0;j<4;j++){nor.set([nx,0,nz],(v+j)*3);col.set([c[0]*sh,c[1]*sh,c[2]*sh],(v+j)*3)}v+=4;
+   idx[q++]=w;idx[q++]=w+1;idx[q++]=w+2;idx[q++]=w;idx[q++]=w+2;idx[q++]=w+3}}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('normal',new THREE.BufferAttribute(nor,3));g.setAttribute('color',new THREE.BufferAttribute(col,3));g.setIndex(new THREE.BufferAttribute(idx,1));
+ const m=new THREE.Mesh(g,new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide}));scene.add(m);m.userData.n=B.length;return m;
 })();
 
 // roads
@@ -413,13 +424,20 @@ function applyScenario(){
  const p=[],q=[],pn=[];
  links.forEach(L=>{if(L.bus){const o=off(L,0);ribbon(L,o-LW/2+.15,o+LW/2-.1,.05,busToday.has(L.i)?p:pn)}
   if(S.scen==='prop'&&L.imp&&L.n>=2&&routeLinkSet.has(L)){const o=off(L,0);ribbon(L,o-LW/2+.15,o+LW/2-.1,.04,q)}});
- busMesh=new THREE.Group();busMesh.add(flat(mkMesh(p,0x1fa64a,{emissive:0x1fa64a,emissiveIntensity:.25}),-3),flat(mkMesh(pn,0x7c5cff,{emissive:0x7c5cff,emissiveIntensity:.25}),-3));scene.add(busMesh);
+ const hp=[],hpn=[],ep=[];links.forEach(L=>{if(!L.bus)return;const o=off(L,0);ribbon(L,o-LW/2-2.2,o+LW/2+2.2,.03,busToday.has(L.i)?hp:hpn);
+  for(const e of [o-LW/2+.15,o+LW/2-.1])for(let j=0;j<L.xs.length-1;j++){const a=posAt(L,L.cum[j]+.01,e,{}),b=posAt(L,L.cum[j+1]-.01,e,{});ep.push(a.x,.12,a.z,b.x,.12,b.z)}});
+ const bm=(pos,c,op)=>{const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));return new THREE.Mesh(g,new THREE.MeshBasicMaterial({color:c,transparent:op<1,opacity:op,side:THREE.DoubleSide,fog:false}))};
+ busMesh=new THREE.Group();
+ const haloE=flat(bm(hp,0x2bff6a,.28),-1.6),haloP=flat(bm(hpn,0xa98bff,.3),-1.6);haloE.userData.halo=haloP.userData.halo=true;
+ const eg=new THREE.BufferGeometry();eg.setAttribute('position',new THREE.Float32BufferAttribute(ep,3));const edge=flat(new THREE.LineSegments(eg,new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.85})),-1.4);
+ busMesh.add(haloE,haloP,flat(bm(p,0x22e05e,1),-1.5),flat(bm(pn,0x9473ff,1),-1.5),edge);scene.add(busMesh);busGlow();
  impMesh=flat(mkMesh(q,0x9a9a9a,{transparent:true,opacity:.7}),-3);scene.add(impMesh);
  refreshParking();
 }
+function busGlow(){if(!busMesh)return;const h=(S.t%86400)/3600;const night=h<6.5||h>=19;const far=cam.dist>2500;busMesh.children.forEach(m=>{if(m.userData.halo){m.material.opacity=(night?.55:.28)+(far?.2:0);m.scale.y=1}})}
 const routeLinkSet=new Set();routes.forEach(r=>r.dirs.forEach(d=>d.path.forEach(L=>routeLinkSet.add(L))));
 // route ribbons
-const routeMeshes=routes.map(r=>{const g=new THREE.Group();r.dirs.forEach(d=>{const p=[];d.path.forEach(L=>{const o=off(L,0);ribbon(L,o-.45,o+.45,.25,p)});const m=flat(mkMesh(p,new THREE.Color(r.color),{emissive:new THREE.Color(r.color),emissiveIntensity:.35}),-2);g.add(m)});scene.add(g);return g});
+const routeMeshes=routes.map(r=>{const g=new THREE.Group();r.dirs.forEach(d=>{const p=[];d.path.forEach(L=>{const o=off(L,0);ribbon(L,o-.45,o+.45,.25,p)});const m=flat(new THREE.Mesh(new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(p,3)),new THREE.MeshBasicMaterial({color:new THREE.Color(r.color),side:THREE.DoubleSide,transparent:true,opacity:.9})),-1.3);g.add(m)});scene.add(g);return g});
 // stops
 const stopGroup=new THREE.Group();scene.add(stopGroup);
 {
@@ -440,29 +458,36 @@ const sigMesh=(()=>{const g=new THREE.BoxGeometry(1.2,1.2,1.2);g.translate(0,5,0
  const gr=new THREE.Group();gr.add(m,pm);scene.add(gr);m.userData.group=gr;return m})();
 
 // ================= VEHICLES (instanced) =================
+function taxiGeo(){const a=carGeo(4.5,1.8,1.5,.55);const s=new THREE.BoxGeometry(.9,.42,1.0);s.translate(-.2,1.5+.21+.25,0);return merge([a,s])}
 function carGeo(l,w,h,cab){const a=new THREE.BoxGeometry(l,h*.55,w);a.translate(0,h*.275+.25,0);const parts=[a];if(cab){const b=new THREE.BoxGeometry(l*cab,h*.45,w*.86);b.translate(-l*.05,h*.55+h*.225+.25,0);parts.push(b)}return merge(parts)}
-function merge(gs){const pos=[],nor=[];for(const g of gs){const n=g.toNonIndexed();pos.push(...n.attributes.position.array);nor.push(...n.attributes.normal.array)}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(nor,3));return g}
+function merge(gs){const pos=[],nor=[];for(const g of gs){const n=g.index?g.toNonIndexed():g;pos.push(...n.attributes.position.array);nor.push(...n.attributes.normal.array)}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(nor,3));return g}
 const MAXV=30000;
 const TYPES={
  car:{geo:carGeo(4.4,1.8,1.5,.55),max:MAXV,len:4.6,a:1.6,b:2.2,s0:2,T:1.35},
- taxi:{geo:carGeo(4.5,1.8,1.5,.55),max:8000,len:4.6,a:2.1,b:2.6,s0:1.6,T:1.05,color:0xffc61a},
+ taxi:{geo:taxiGeo(),max:8000,len:4.6,a:2.1,b:2.6,s0:1.6,T:1.05,color:0xffc61a},
  bus:{geo:carGeo(12,2.55,3.1,0),max:400,len:12.5,a:1.0,b:1.6,s0:2.5,T:1.5,color:0x2f6fe0},
  pcar:{geo:carGeo(4.4,1.8,1.5,.55),max:60,len:4.6,a:1.6,b:2.2,s0:2,T:1.35,color:0xff2a1f},
- ptaxi:{geo:carGeo(4.5,1.8,1.5,.55),max:60,len:4.6,a:2.1,b:2.6,s0:1.6,T:1.05,color:0xffd400},
- cbus:{geo:carGeo(11,2.5,3.0,0),max:900,len:11.5,a:1.0,b:1.6,s0:2.5,T:1.5,color:0x3f86e8},
+ ptaxi:{geo:taxiGeo(),max:60,len:4.6,a:2.1,b:2.6,s0:1.6,T:1.05,color:0xffd400},
+ cbus:{geo:carGeo(11,2.5,3.0,0),max:1000,len:11.5,a:1.0,b:1.6,s0:2.5,T:1.5,color:0x3f86e8},
  mini:{geo:carGeo(6.4,2.1,2.6,0),max:200,len:6.8,a:1.4,b:2.2,s0:2,T:1.2,color:0xf0dc8a},
  trol:{geo:carGeo(12,2.55,3.3,0),max:150,len:12.5,a:.9,b:1.5,s0:2.5,T:1.6,color:0x19a596},
  van:{geo:carGeo(5.4,2.0,2.2,.7),max:2500,len:5.7,a:1.3,b:2.0,s0:2,T:1.4,color:0xdfe3e8},
  truck:{geo:carGeo(8.5,2.5,3.2,.3),max:900,len:9,a:.8,b:1.6,s0:2.5,T:1.7,color:0x9a7650},
  block:{geo:carGeo(4.4,1.8,1.5,.55),max:600,len:4.6,a:1,b:1,s0:1,T:1,color:0xff8a1c},
 };
-const CARCOL=[0xffffff,0xe3e6ea,0xb9bec6,0x55595f,0x3d6bb3,0xb33a3a,0x5f7a5a,0xf3ecd8,0xffffff,0xd0d4da];
+const CARCOL=[0xd9dce0,0xb9bec6,0x8d9299,0x5b5f66,0x3e4248,0xc9c4ba,0xa9aeb5,0x6f747b,0xe6e6e6,0x2c2f33];
 for(const [k,T] of Object.entries(TYPES)){
  const mat=new THREE.MeshLambertMaterial({color:T.color||0xffffff});
  T.mesh=new THREE.InstancedMesh(T.geo,mat,T.max);T.mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);T.mesh.count=0;T.mesh.frustumCulled=false;
  if(k==='car'){for(let i=0;i<T.max;i++)T.mesh.setColorAt(i,new THREE.Color(CARCOL[i%CARCOL.length]))}
  scene.add(T.mesh);T.k=k;
 }
+// beacons over taxis and public transport (scale with camera distance)
+const ACC=new Set(['taxi','ptaxi','bus','cbus','mini','trol']);
+const bgeo=new THREE.OctahedronGeometry(1,0);bgeo.scale(1,1.4,1);
+const beacon=new THREE.InstancedMesh(bgeo,new THREE.MeshBasicMaterial({transparent:true,opacity:.95,fog:false}),14000);beacon.frustumCulled=false;beacon.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+for(let i=0;i<14000;i++)beacon.setColorAt(i,new THREE.Color(0xffffff));beacon.count=0;scene.add(beacon);
+const BCOL={taxi:new THREE.Color(0xffd21a),ptaxi:new THREE.Color(0xffe600),bus:new THREE.Color(0x3d8bff),cbus:new THREE.Color(0x2f7dff),mini:new THREE.Color(0xff9f1a),trol:new THREE.Color(0x19d6c0)};
 // pins over pair vehicles
 const pinGeo=new THREE.ConeGeometry(2.2,5,10);pinGeo.rotateX(Math.PI);pinGeo.translate(0,13,0);
 const pinMesh=new THREE.InstancedMesh(pinGeo,new THREE.MeshBasicMaterial(),120);for(let i=0;i<120;i++)pinMesh.setColorAt(i,new THREE.Color(0xffffff));pinMesh.count=0;pinMesh.frustumCulled=false;scene.add(pinMesh);
@@ -647,21 +672,22 @@ function spawnPathVeh(k,path,opts={}){const L=path[0];const tmp={k};const lane=l
 
 // ================= PAIRS =================
 const pairs=[];let PID=0;
-function startPair(path,label,color){
- const p={id:++PID,label,color,t0:S.t,res:{},path,need:S.withBus?3:2};
+function startPair(path,label,color,tpath){
+ tpath=tpath||path;const p={id:++PID,label,color,t0:S.t,res:{},path,tpath,need:S.withBus?3:2};
  const L=path[0];const used=new Map();
- const place=(k,pref,extra={})=>{const tmp={k};let lane=laneFor(tmp,L,pref);
+ const place=(k,pref,extra={},LL=L)=>{const L=LL;const tmp={k};let lane=laneFor(tmp,L,pref);
   // pick a free allowed lane so vehicles do not overlap at the start line
   const lo=minLane(tmp,L),hi=maxLane(tmp,L);if(used.has(lane)){for(let t=lo;t<=hi;t++)if(!used.has(t)){lane=t;break}}
   const s=1+(used.has(lane)?used.get(lane):0);used.set(lane,(used.get(lane)||0)+7);
   for(const o of L.lanes[lane].slice())if(o.s<s+8&&o.s>s-6&&!o.pair)removeVeh(o);
-  const v=addVeh(k,L,s,lane,{path,f:1,v:0,budget:1e9,pair:p,...extra});if(v)v.born=S.t-(s-1)/8;return v};
- p.car=place('pcar',1);p.taxi=place('ptaxi',0);
+  const v=addVeh(k,L,s,lane,{path:extra.path||path,f:1,v:0,budget:1e9,pair:p,...extra});if(v)v.born=S.t-(s-1)/8;return v};
+ p.car=place('pcar',1);p.taxi=tpath[0]===L?place('ptaxi',0,{path:tpath}):place('ptaxi',0,{path:tpath},tpath[0]);
  if(S.withBus){const r=routes.find(r=>r.dirs.some(d=>d.path===path));const d=r&&r.dirs.find(d=>d.path===path);p.bus=place('bus',0,{stops:d?d.stops:[],route:r})}
  pairs.push(p);drawPairPath(p);renderPairs();return p;
 }
 function finishPair(v){const p=v.pair;const key=v.k==='pcar'?'car':v.k==='ptaxi'?'taxi':'bus';p.res[key]=S.t-v.born;if(Object.keys(p.res).length>=p.need){p.done=true;if(p.line){scene.remove(p.line)}}renderPairs()}
-function drawPairPath(p){const pts=[];p.path.forEach(L=>{const o=off(L,Math.min(1,L.n-1));ribbon(L,o-.35,o+.35,.3,pts)});p.line=flat(mkMesh(pts,0xffffff,{emissive:0xffffff,emissiveIntensity:.5,transparent:true,opacity:.75}),-1);scene.add(p.line)}
+function drawPairPath(p){const pts=[],tp=[];p.path.forEach(L=>{const o=off(L,L.n-1);ribbon(L,o-3,o+3,.32,pts)});if(p.tpath!==p.path)p.tpath.forEach(L=>{const o=off(L,0);ribbon(L,o-3,o+3,.34,tp)});
+ p.line=new THREE.Group();const mk=(a,c)=>{const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(a,3));return flat(new THREE.Mesh(g,new THREE.MeshBasicMaterial({color:c,side:THREE.DoubleSide,fog:false})),-1)};p.line.add(mk(pts,0xff3b30));p.line.children[0].material.transparent=true;p.line.children[0].material.opacity=.85;if(tp.length)p.line.add(mk(tp,0xffd400));scene.add(p.line)}
 function renderPairs(){
  const tb=$('res').tBodies[0];
  tb.innerHTML=pairs.slice().reverse().map(p=>{const c=p.res.car,t=p.res.taxi,b=p.res.bus;const g=c&&t?c-t:null;
@@ -669,16 +695,16 @@ function renderPairs(){
  const done=pairs.filter(p=>p.res.car&&p.res.taxi);
  $('avg').textContent=done.length?`Միջինը ${done.length} զույգի համար՝ տաքսին արագ է ${fmtT(done.reduce((a,p)=>a+p.res.car-p.res.taxi,0)/done.length)} րոպեով (${Math.round(done.reduce((a,p)=>a+(p.res.car-p.res.taxi)/p.res.car,0)/done.length*100)}%)։`:'Մեկնարկեք զույգ՝ համեմատելու համար։';
 }
-function shortestPath(La,Lb){ // Dijkstra over links, free-flow time, cars only
+function shortestPath(La,Lb,taxi){ // Dijkstra over links, free-flow time; taxi prefers bus lanes
  const dist=new Map(),prev=new Map();const H=[];const push=(d,L)=>{H.push([d,L]);let i=H.length-1;while(i>0){const p=(i-1)>>1;if(H[p][0]<=H[i][0])break;[H[p],H[i]]=[H[i],H[p]];i=p}};
  const pop=()=>{const t=H[0],l=H.pop();if(H.length){H[0]=l;let i=0;for(;;){const a=2*i+1,b=a+1;let m=i;if(a<H.length&&H[a][0]<H[m][0])m=a;if(b<H.length&&H[b][0]<H[m][0])m=b;if(m===i)break;[H[m],H[i]]=[H[i],H[m]];i=m}}return t};
  dist.set(La,0);push(0,La);
- while(H.length){const [d,L]=pop();if(L===Lb)break;if(d>dist.get(L))continue;for(const o of L.out){const M=o.L;const nd=d+M.len/M.spd*(M.cls>=5?1.6:1)+(Math.abs(o.ang)>1?8:0);if(nd<(dist.has(M)?dist.get(M):1e18)){dist.set(M,nd);prev.set(M,L);push(nd,M)}}}
+ while(H.length){const [d,L]=pop();if(L===Lb)break;if(d>dist.get(L))continue;for(const o of L.out){const M=o.L;const nd=d+M.len/M.spd*(M.cls>=5?1.6:1)*(taxi&&M.bus?.55:1)+(Math.abs(o.ang)>1?8:0);if(nd<(dist.has(M)?dist.get(M):1e18)){dist.set(M,nd);prev.set(M,L);push(nd,M)}}}
  if(!prev.has(Lb)&&La!==Lb)return null;const path=[Lb];let L=Lb;while(L!==La){L=prev.get(L);path.push(L)}return path.reverse();
 }
 
 // ================= CAMERA CONTROL =================
-const cam={x:900,z:-500,dist:4600,yaw:.35,pitch:.85};
+const cam={x:900,z:-300,dist:6200,yaw:.35,pitch:.9};
 function applyCam(){const cp=Math.cos(cam.pitch);camera.position.set(cam.x+cam.dist*Math.sin(cam.yaw)*cp,cam.dist*Math.sin(cam.pitch),cam.z+cam.dist*Math.cos(cam.yaw)*cp);camera.lookAt(cam.x,0,cam.z)}
 let drag=null;const ptrs=new Map();
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
@@ -688,7 +714,7 @@ canvas.addEventListener('pointermove',e=>{
  if(!drag||!prevP){hover(e);return}
  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
  if(ptrs.size===2){const [a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y),ang=Math.atan2(b.y-a.y,b.x-a.x);
-  if(drag.pinch){cam.dist=Math.min(14000,Math.max(40,cam.dist*drag.pinch.d/d));cam.yaw-=ang-drag.pinch.a}drag.pinch={d,a:ang};drag.moved+=10;return}
+  if(drag.pinch){cam.dist=Math.min(22000,Math.max(40,cam.dist*drag.pinch.d/d));cam.yaw-=ang-drag.pinch.a}drag.pinch={d,a:ang};drag.moved+=10;return}
  const dx=e.clientX-prevP.x,dy=e.clientY-prevP.y;drag.moved+=Math.abs(dx)+Math.abs(dy);
  if(drag.b===2||drag.shift){cam.yaw-=dx*.005;cam.pitch=Math.min(1.5,Math.max(.12,cam.pitch+dy*.004))}
  else{const k=cam.dist*.0011;const c=Math.cos(cam.yaw),s=Math.sin(cam.yaw);cam.x-=(dx*c+dy*s/Math.max(.35,Math.sin(cam.pitch)))*k;cam.z-=(-dx*s+dy*c/Math.max(.35,Math.sin(cam.pitch)))*k;if(S.follow){S.follow=false;$('follow').checked=false}}
@@ -696,10 +722,12 @@ canvas.addEventListener('pointermove',e=>{
 canvas.addEventListener('pointerup',e=>{ptrs.delete(e.pointerId);if(drag&&drag.moved<6&&ptrs.size===0)click(e);if(ptrs.size===0)drag=null;else if(drag)drag.pinch=null});
 canvas.addEventListener('pointercancel',e=>{ptrs.delete(e.pointerId);drag=null});
 canvas.addEventListener('wheel',e=>{e.preventDefault();const f=Math.exp(e.deltaY*.0012);
- const g=groundAt(e.clientX,e.clientY);cam.dist=Math.min(14000,Math.max(40,cam.dist*f));if(g&&f<1){cam.x+=(g.x-cam.x)*(1-f)*.6;cam.z+=(g.z-cam.z)*(1-f)*.6}},{passive:false});
+ const g=groundAt(e.clientX,e.clientY);cam.dist=Math.min(22000,Math.max(40,cam.dist*f));if(g&&f<1){cam.x+=(g.x-cam.x)*(1-f)*.6;cam.z+=(g.z-cam.z)*(1-f)*.6}},{passive:false});
 const ray=new THREE.Raycaster(),mv=new THREE.Vector2(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),0),gp=new THREE.Vector3();
 function groundAt(cx,cy){const r=canvas.getBoundingClientRect();mv.set((cx-r.left)/r.width*2-1,-(cy-r.top)/r.height*2+1);ray.setFromCamera(mv,camera);return ray.ray.intersectPlane(plane,gp)?{x:gp.x,z:gp.z}:null}
 let sel=null,pickMode=0,pickA=null,hoverT=0;
+const abMk=(()=>{const g=new THREE.Group();const mk=(c,t)=>{const o=new THREE.Group();const pole=new THREE.Mesh(new THREE.CylinderGeometry(.6,.6,30,8).translate(0,15,0),new THREE.MeshBasicMaterial({color:c}));const ball=new THREE.Mesh(new THREE.SphereGeometry(5,16,12).translate(0,34,0),new THREE.MeshBasicMaterial({color:c}));const lb=label(t,0,52,0,.25,'#fff',c===0x19c37d?'rgba(25,195,125,.95)':'rgba(255,59,48,.95)');o.add(pole,ball,lb);o.visible=false;g.add(o);return o};const A=mk(0x19c37d,'A'),B=mk(0xff3b30,'B');scene.add(g);return{A,B}})();
+function setMk(m,L,s){if(!L){m.visible=false;return}const p=posAt(L,s==null?L.len/2:s,0,{});m.position.set(p.x,0,p.z);m.visible=true}
 function vehAt(x,z,r=7){let best=null,bd=r;for(const v of veh){posAt(v.L,v.s,v.lat,tmpP);const d=Math.hypot(tmpP.x-x,tmpP.z-z);if(d<bd){bd=d;best=v}}return best}
 const tip=$('tip');
 const VN={car:'Մեքենա',taxi:'Տաքսի',bus:'Ավտոբուս (առաջարկվող երթ.)',pcar:'Զույգի մեքենա',ptaxi:'Զույգի տաքսի',cbus:'Քաղաքային ավտոբուս',mini:'Միկրոավտոբուս',trol:'Տրոլեյբուս',van:'Վեն',truck:'Բեռնատար',block:'Կրկնակի կայանված մեքենա'};
@@ -713,14 +741,37 @@ function hover(e){const now=performance.now();if(now-hoverT<60)return;hoverT=now
 function vehInfo(v){return `<b>${VN[v.k]}${v.route?' · Երթուղի '+v.route.num:''}</b>Արագություն՝ <span class="num">${(v.v*KMH).toFixed(0)} կմ/ժ</span><br>Ճանապարհին՝ <span class="num">${fmtT(S.t-v.born)}</span><br>${esc(v.L.E.name||CN[v.L.cls])} · շարք ${v.lane+1}/${v.L.n}${v.L.bus&&v.lane===0?' (ավտոբուսի գիծ)':''}`}
 function click(e){const g=groundAt(e.clientX,e.clientY);if(!g)return;
  if(pickMode){const L=nearestLink(g.x,g.z,40,L=>L.cls<=5);if(!L){$('pickmsg').textContent='Մոտակայքում փողոց չկա, փորձեք կրկին։';return}
-  if(pickMode===1){pickA=L;pickMode=2;$('pickmsg').textContent='A՝ '+(L.E.name||CN[L.cls])+'։ Հիմա ընտրեք B-ն։';return}
-  const path=shortestPath(pickA,L);pickMode=0;$('pick').classList.remove('on');
-  if(!path){$('pickmsg').textContent='Ուղի չգտնվեց, փորձեք այլ կետեր։';return}
-  const len=path.reduce((a,L)=>a+L.len,0);$('pickmsg').textContent=`Ուղի՝ ${(len/1000).toFixed(1)} կմ, ${path.filter(L=>L.bus).length} հատված ավտոբուսի գծով։`;
-  const sb=S.withBus;S.withBus=false;startPair(path,(pickA.E.name||'A').split(' ')[0]+' → '+(L.E.name||'B').split(' ')[0]);S.withBus=sb;return}
+  if(pickMode===1){pickA=L;pickMode=2;setMk(abMk.A,L);setMk(abMk.B,null);$('pickmsg').textContent='A՝ '+(L.E.name||CN[L.cls])+'։ Հիմա ընտրեք B-ն։';return}
+  setMk(abMk.B,L);runAB(pickA,L);return}
  const v=vehAt(g.x,g.z,8);sel=v;if(v){$('follow').checked=true;S.follow=true}
 }
 
+function runAB(La,Lb){
+ setMk(abMk.A,La);setMk(abMk.B,Lb);
+ const path=shortestPath(La,Lb,false);pickMode=0;$('pick').classList.remove('on');
+ if(!path){$('pickmsg').textContent='Ուղի չգտնվեց (միակողմանի փողոց կամ կտրված ցանց), փորձեք այլ կետեր։';$('est').innerHTML='';return}
+ const tpath=S.taxiBus?(shortestPath(La,Lb,true)||path):path;
+ const km=a=>a.reduce((x,L)=>x+L.len,0)/1000,bkm=a=>a.reduce((x,L)=>x+(L.bus?L.len:0),0)/1000;
+ $('pickmsg').innerHTML=`Մեքենա՝ <b>${km(path).toFixed(1)} կմ</b> (կարմիր գիծ) · Տաքսի՝ <b>${km(tpath).toFixed(1)} կմ</b>, որից <b style="color:#3fd26e">${bkm(tpath).toFixed(1)} կմ</b> ավտոբուսի գծով (դեղին գիծ)։ Սիմուլյացիան մեկնարկեց, արդյունքը՝ ներքևի աղյուսակում։`;
+ lastAB={path,tpath,La,Lb};renderEst();
+ const sb=S.withBus;S.withBus=false;const pr=startPair(path,(La.E.name||'A').split(' ')[0]+' → '+(Lb.E.name||'B').split(' ')[0],null,tpath);S.withBus=sb;
+ flyToPath(path.concat(tpath));sel=pr.taxi;
+}
+let lastAB=null;
+// Real-life estimate from the report's speeds (not from the simulation): per-link typical car speed by period,
+// taxi gets bus-lane speed on bus-lane links (no queue, still signals), same as cars elsewhere.
+function realSpeed(L,per){const lim=L.spd*KMH;
+ if(per==='night')return Math.min(lim*.85,42);
+ let v=L.hot?10:L.urb?15:L.cls<=2?20:L.cls<=4?23:20; // report: corridors as low as 10, centre 10–20, city 23.5 avg
+ if(per==='mid')v=Math.min(lim*.8,v*1.45);return Math.min(v,lim)}
+function busLaneSpeed(L,per){const lim=L.spd*KMH;return per==='night'?Math.min(lim*.85,42):Math.min(lim*.8,per==='peak'?27:30)} // bus 20.6 km/h incl. stops → ≈27 without stops
+function tripTime(path,per,taxi){let t=0;for(const L of path){const v=taxi&&L.bus?busLaneSpeed(L,per):realSpeed(L,per);t+=L.len/1000/v*60}return t}
+function renderEst(){const el=$('est');if(!lastAB){el.innerHTML='';return}const {path,tpath}=lastAB;
+ const rows=[['peak','Պիկ'],['mid','Միջպիկ'],['night','Գիշեր']].map(([k,n])=>{const c=tripTime(path,k,false),t=Math.min(c,tripTime(tpath,k,true));const g=c-t;return {k,n,c,t,g}});
+ const pk=rows[0];const yr=pk.g*2*250/60;const bl=tpath.reduce((x,L)=>x+(L.bus?L.len:0),0)/1000;
+ el.innerHTML=`<h3>Իրական կյանքում (գնահատական)</h3><div style="overflow-x:auto"><table><thead><tr><th></th><th>Մեքենա</th><th>Տաքսի*</th><th>Խնայում</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.n}</td><td class="num">${r.c.toFixed(0)} ր</td><td class="num">${r.t.toFixed(0)} ր</td><td class="num ${r.g>.5?'gain':''}">${r.g>.5?'−'+r.g.toFixed(0)+' ր ('+Math.round(r.g/r.c*100)+'%)':'≈0'}</td></tr>`).join('')}</tbody></table></div>
+ <div class="ref"><div class="r"><span>Ավտոբուսի գծով հատված</span><b>${bl.toFixed(1)} կմ</b></div><div class="r"><span>Տարեկան խնայում (պիկին, 2 ուղևորություն × 250 աշխ. օր)</span><b>≈${yr.toFixed(0)} ժամ</b></div></div>
+ <p class="note">* Տաքսի, որը կարող է օգտվել ավտոբուսի գծից։ Պիկ՝ 07:30–09:30 և 17:00–19:00, միջպիկ՝ 10:00–16:00, գիշեր՝ 22:00–06:00։ Հաշվարկը զեկույցի արագություններից է, ոչ թե սիմուլյացիայից. մեքենան պիկին՝ 10 կմ/ժ ծանրաբեռնված փողոցներում, 15 կմ/ժ Կենտրոնում, 20–23 կմ/ժ այլուր, միջպիկին ≈1,45 անգամ արագ, գիշերը՝ ազատ հոսք։ Տաքսին ավտոբուսի գծում պիկին ≈27 կմ/ժ է (ավտոբուսը 20,6 կմ/ժ է կանգառներով, առանց կանգառների՝ ≈27), մնացած հատվածներում՝ ինչպես մեքենան։ Գծերը՝ «${S.scen==='prop'?'Առաջարկ':'Այսօր'}» սցենարով (փոխվում է «Գծեր» ներդիրում)։</p>`}
 // ================= UI =================
 const tabs=$('tabs');tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('on',s.id==='s-'+b.dataset.t))});
 $('minb').onclick=()=>{const p=$('panel');p.classList.toggle('min');$('minb').textContent=p.classList.contains('min')?'+':'–'};
@@ -735,15 +786,17 @@ $('presets').onclick=e=>{const b=e.target.closest('button');if(!b)return;setTime
 function setTime(t){const day=Math.floor(S.t/86400)*86400;S.t=day+t;$('tod').value=Math.floor(t/60);routes.forEach(r=>r.dirs.forEach(d=>d.lastSpawn=-1e9));refreshParking();lighting()}
 $('tod').oninput=e=>setTime(+e.target.value*60);
 $('day24').onchange=e=>{S.day24=e.target.checked;if(S.day24){S.speed=120;S.play=true;syncSpeed()}};
-{const pts=[];for(let i=0;i<=96;i++){const h=i/4;pts.push((i*3).toFixed(1)+','+(44-demand(h)*40).toFixed(1))}$('demand').innerHTML=`<polygon points="0,46 ${pts.join(' ')} 288,46" fill="rgba(255,204,51,.18)"/><polyline points="${pts.join(' ')}" fill="none" stroke="#ffcc33" stroke-width="1.5"/><line id="dmark" x1="0" x2="0" y1="0" y2="46" stroke="#fff" stroke-width="1.5"/>`}
+function drawDemand(){const el=$('demand');if(!el)return;const pts=[];for(let i=0;i<=96;i++){const h=i/4;pts.push((i*3).toFixed(1)+','+(44-demand(h)*36).toFixed(1))}const pk=S.dens;el.innerHTML=`<polygon points="0,46 ${pts.join(' ')} 288,46" fill="rgba(255,204,51,.18)"/><polyline points="${pts.join(' ')}" fill="none" stroke="#ffcc33" stroke-width="1.5"/><text x="2" y="9" fill="#ffcc33" font-size="8">պիկ ≈${pk.toLocaleString('en')}</text><text x="2" y="42" fill="#93a0b4" font-size="7">գիշեր ≈${Math.round(pk*demand(3)).toLocaleString('en')}</text><line id="dmark" x1="0" x2="0" y1="0" y2="46" stroke="#fff" stroke-width="1.5"/>`}
+drawDemand();
 const bindR=(id,key,fmt,conv=x=>x,after)=>{const el=$(id);const f=()=>{S[key]=conv(+el.value);$('v-'+id).textContent=fmt(+el.value);after&&after()};el.oninput=f;f()};
-const fleet=()=>{S.dens=Math.round(343220*.88*S.onroad*S.area);$('fleetcalc').textContent=S.dens.toLocaleString('en')+' մեքենա'};
+const fleet=()=>{S.dens=Math.round(S.fleet*.88*S.onroad*S.area);$('fleetcalc').textContent=S.dens.toLocaleString('en')+' մեքենա';$('fleet88').textContent=Math.round(S.fleet*.88).toLocaleString('en');drawDemand()};
+bindR('fleet','fleet',v=>Number(v).toLocaleString('en'),v=>v,fleet);
 bindR('onroad','onroad',v=>v+'%',v=>v/100,fleet);bindR('area','area',v=>v+'%',v=>v/100,fleet);bindR('pts','ptShare',v=>v+'%',v=>v/100);bindR('hot','hot',v=>v+'%',v=>v/100);$('hoton').onchange=e=>{S.hotOn=e.target.checked};bindR('dpark','dpark',v=>v);
 $('daytype').onclick=e=>{const b=e.target.closest('button');if(!b)return;S.weekend=b.dataset.d==='we';$('daytype').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))};
 $('event').onchange=e=>{S.event=e.target.checked;if(S.event)setTime(7.75*3600)};bindR('tshare','tshare',v=>v+'%',v=>v/100);bindR('vcar','vcar',v=>v+' կմ/ժ');bindR('vtaxi','vtaxi',v=>v+' կմ/ժ');bindR('vbus','vbus',v=>v+' կմ/ժ');bindR('aggr','aggr',v=>v);bindR('head','head',v=>v+' ր');bindR('dwell','dwell',v=>v+' վ');
 $('park').onchange=e=>{S.park=e.target.checked;refreshParking()};
 $('sigmode').onclick=e=>{const b=e.target.closest('button');if(!b)return;S.sig=b.dataset.m;$('sigmode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));sigs.forEach(s=>{s.t=0;s.ph=0;s.state=[0,2];s.gap=0;s.allred=false})};
-$('scen').onclick=e=>{const b=e.target.closest('button');if(!b)return;S.scen=b.dataset.s;$('scen').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applyScenario()};
+$('scen').onclick=e=>{const b=e.target.closest('button');if(!b)return;S.scen=b.dataset.s;$('scen').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applyScenario();if(lastAB){lastAB.tpath=S.taxiBus?(shortestPath(lastAB.La,lastAB.Lb,true)||lastAB.path):lastAB.path;renderEst()}};
 $('taxibus').onchange=e=>{S.taxiBus=e.target.checked};
 $('withbus').onchange=e=>{S.withBus=e.target.checked};
 $('routes').innerHTML=routes.map(r=>`<div class="rt"><div class="t"><span class="sw" style="background:${r.color}"></span>Երթուղի ${r.num}</div><div class="m">${esc(r.name)} · ${r.dirs.map(d=>d.d+' '+(d.len/1000).toFixed(1)+' կմ, '+d.stops.length+' կանգառ').join(' · ')}</div><div class="row"><label class="tg" style="padding:0"><input type="checkbox" data-r="${r.ri}" data-k="show" checked> Ցույց տալ</label><label class="tg" style="padding:0 0 0 10px"><input type="checkbox" data-r="${r.ri}" data-k="run" checked> Ավտոբուսներ</label><button class="btn" data-go="${r.ri}" style="margin-left:auto;min-height:32px;padding:4px 10px">Դիտել</button></div></div>`).join('');
@@ -751,15 +804,16 @@ $('routes').onchange=e=>{const t=e.target;if(!t.dataset.r)return;const r=routes[
 $('routes').onclick=e=>{const b=e.target.closest('[data-go]');if(!b)return;const r=routes[+b.dataset.go];flyToPath(r.dirs[0].path)};
 $('pairroutes').innerHTML=routes.map(r=>`<div class="rt"><div class="t"><span class="sw" style="background:${r.color}"></span>Երթուղի ${r.num}</div><div class="m">${esc(r.name)}</div><div class="row">${r.dirs.map(d=>`<button class="btn" data-pr="${r.ri}" data-pd="${d.di}">${d.d} · ${(d.len/1000).toFixed(1)} կմ</button>`).join('')}</div></div>`).join('');
 $('pairroutes').onclick=e=>{const b=e.target.closest('[data-pr]');if(!b)return;const r=routes[+b.dataset.pr],d=r.dirs[+b.dataset.pd];const p=startPair(d.path,'Երթ. '+r.num+' '+d.d);sel=p.taxi;S.follow=true;$('follow').checked=true;cam.dist=Math.min(cam.dist,700)};
-$('pick').onclick=()=>{pickMode=pickMode?0:1;$('pick').classList.toggle('on',!!pickMode);$('pickmsg').textContent=pickMode?'Սեղմեք քարտեզի վրա մեկնարկի կետը (A)։':''};
-$('clr').onclick=()=>{pairs.forEach(p=>{if(p.line)scene.remove(p.line);for(const k of ['car','taxi','bus'])if(p[k]&&!p[k].dead)removeVeh(p[k])});pairs.length=0;renderPairs()};
-const CAMS=[['Ամբողջը',900,-600,8600,.35,.95],['Կենտրոն',...districtCam('Kentron')],['Արաբկիր',...districtCam('Arabkir')],['Քանաքեռ-Զեյթուն',...districtCam('Kanaker-Zeytun')],['Մալաթիա-Սեբաստիա',...districtCam('Malatia-Sebastia')],['Նոր Նորք',...districtCam('Nor Nork')],['Նորք-Մարաշ',...districtCam('Nork-Marash')],['Հանրապետության հր.',1000,180,700,.6,.75]];
+$('pick2').onclick=()=>$('pick').click();
+$('pick').onclick=()=>{pickMode=pickMode?0:1;$('pick').classList.toggle('on',!!pickMode);$('pickmsg').textContent=pickMode?'Սեղմեք քարտեզի վրա մեկնարկի կետը (A)։':'';if(pickMode){setMk(abMk.A,null);setMk(abMk.B,null)}};
+$('clr').onclick=()=>{setMk(abMk.A,null);setMk(abMk.B,null);lastAB=null;renderEst();$('pickmsg').textContent='';pairs.forEach(p=>{if(p.line)scene.remove(p.line);for(const k of ['car','taxi','bus'])if(p[k]&&!p[k].dead)removeVeh(p[k])});pairs.length=0;renderPairs()};
+const CAMS=[['Ամբողջը',300,600,15500,.35,1.0],['Կենտրոն',...districtCam('Kentron')],['Արաբկիր',...districtCam('Arabkir')],['Քանաքեռ-Զեյթուն',...districtCam('Kanaker-Zeytun')],['Մալաթիա-Սեբաստիա',...districtCam('Malatia-Sebastia')],['Նոր Նորք',...districtCam('Nor Nork')],['Նորք-Մարաշ',...districtCam('Nork-Marash')],['Շենգավիթ',...districtCam('Shengavit')],['Էրեբունի',...districtCam('Erebuni')],['Աջափնյակ',...districtCam('Ajapnyak')],['Ավան',...districtCam('Avan')],['Դավթաշեն',...districtCam('Davtashen')],['Նուբարաշեն',...districtCam('Nubarashen')],['Հանրապետության հր.',1000,180,700,.6,.75]];
 function districtCam(n){const d=districts.find(d=>d.n===n);return d?[d.cx,d.cz,2600,.35,.85]:[0,0,3000,.35,.85]}
 $('cams').innerHTML=CAMS.map((c,i)=>`<button class="btn" data-c="${i}">${c[0]}</button>`).join('');
 let fly=null;$('cams').onclick=e=>{const b=e.target.closest('button');if(!b)return;const c=CAMS[+b.dataset.c];S.follow=false;$('follow').checked=false;fly={from:{...cam},to:{x:c[1],z:c[2],dist:c[3],yaw:c[4],pitch:c[5]},t:0}};
 function flyToPath(path){let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;path.forEach(L=>{L.xs.forEach(x=>{x0=Math.min(x0,x);x1=Math.max(x1,x)});L.zs.forEach(z=>{z0=Math.min(z0,z);z1=Math.max(z1,z)})});fly={from:{...cam},to:{x:(x0+x1)/2,z:(z0+z1)/2,dist:Math.max(x1-x0,z1-z0)*1.3+500,yaw:cam.yaw,pitch:1.0},t:0}}
 const lay=(id,f)=>{$(id).onchange=e=>f(e.target.checked)};
-lay('l-bld',v=>bldMesh.visible=v);lay('l-rt',v=>routeMeshes.forEach((m,i)=>m.visible=v&&routes[i].show));lay('l-stop',v=>stopGroup.visible=v);lay('l-sig',v=>sigMesh.userData.group.visible=v);lay('l-dist',v=>distGroup.visible=v);lay('l-kml',v=>kmlGroup.visible=v);lay('l-cong',v=>{congOn=v;updateCongestion()});
+lay('l-bld',v=>bldMesh.visible=v);lay('l-acc',v=>S.accent=v);lay('l-rt',v=>routeMeshes.forEach((m,i)=>m.visible=v&&routes[i].show));lay('l-stop',v=>stopGroup.visible=v);lay('l-sig',v=>sigMesh.userData.group.visible=v);lay('l-dist',v=>distGroup.visible=v);lay('l-kml',v=>kmlGroup.visible=v);lay('l-cong',v=>{congOn=v;updateCongestion()});
 $('follow').onchange=e=>{S.follow=e.target.checked};
 
 // ================= LIGHTING =================
@@ -769,7 +823,7 @@ function lighting(){distLabels.forEach(l=>l.visible=cam.dist>1600);const h=(S.t%
  const c=skyNight.clone().lerp(skyDay,day);const dusk=Math.max(0,1-Math.abs(el)*4)*(h>4&&h<21?1:0);c.lerp(skyDusk,dusk*.35);
  scene.background=c;scene.fog.color=c;hemi.intensity=.22+.45*day;sun.intensity=.08+.55*day;
  const az=(h-6)/12*Math.PI;sun.position.set(Math.cos(az)*3000,Math.max(300,el*4000),-1500);
- const night=1-day;for(const T of Object.values(TYPES)){T.mesh.material.emissive=new THREE.Color(T.color||0x777777);T.mesh.material.emissiveIntensity=.12+night*.45}
+ const night=1-day;for(const [k,T] of Object.entries(TYPES)){const acc=ACC.has(k);T.mesh.material.emissive=new THREE.Color(T.color||0x777777);T.mesh.material.emissiveIntensity=acc?.3+night*.7:k==='block'?.2+night*.4:.02+night*.12}beacon.material.opacity=.95;busGlow()
 }
 
 // ================= CONGESTION LAYER =================
@@ -783,7 +837,7 @@ function updateCongestion(){
  const slow=[],heavy=[],sev=[];
  for(const L of links){if(L.ema==null||L.len<15||L.emn<4)continue;const dens=L.emn/(L.len/1000)/L.n;if(dens<18)continue;
   const sp=L.ema;const arr=sp<10?sev:sp<20?heavy:sp<30&&L.spd*KMH>=40?slow:null;if(!arr)continue;
-  const a=off(L,L.n-1)-LW/2+.3,b=off(L,0)+LW/2-.3;ribbon(L,a,b,.07,arr)}
+  const a=off(L,L.n-1)-LW/2+.3,b=(L.bus?off(L,1):off(L,0))+LW/2-.3;ribbon(L,a,b,.07,arr)}
  congMesh=new THREE.Group();
  congMesh.add(flat(mkMesh(slow,0xffc233,{transparent:true,opacity:.55,emissive:0xffc233,emissiveIntensity:.35}),-2.5),
   flat(mkMesh(heavy,0xff3b2f,{transparent:true,opacity:.65,emissive:0xff3b2f,emissiveIntensity:.4}),-2.5),
@@ -801,7 +855,7 @@ function renderData(){const D=window.REPORT,el=$('datatab');if(!D){el.textConten
  <h3>Օրվա ժամային կտրվածքներ</h3><div class="ref">${D.time_slices.map(t=>`<div class="r"><span class="num">${t.from}–${t.to}</span><span>${esc(t.use)}</span></div>`).join('')}</div>
  <h3>Խցանման միջանցքներ</h3><div class="ref">${D.congestion_corridors.map(c=>`<div class="r"><span>${esc(c.road)}</span><span style="text-align:right">${esc(c.evidence)}</span></div>`).join('')}</div>
  <h3>Ավտոբուսային գծեր</h3><div class="ref">${D.bus_lanes.map(c=>`<div class="r"><span>${esc(c.corridor)}</span><span style="text-align:right">${esc(c.status)}</span></div>`).join('')}</div>
- <h3>Ինչպես է օգտագործված մոդելում</h3><p class="note">• Ճանապարհին մեքենաներ = 343 220 × 88% × ճանապարհին լինելու բաժին × 6 շրջանի բաժին (երկուսն էլ ենթադրություն, «Հոսք» ներդիրում)։<br>• Քաղաքային ավտոբուսներ, միկրոավտոբուսներ, տրոլեյբուսներ՝ աշխատող քանակով (632/81, հանգստյան օրը՝ 502/61) × տարածքի բաժին, կանգառներով։<br>• Պիկային պատուհաններ՝ 07:30–09:30 և 17:00–19:00։<br>• Խցանման գույներ՝ զեկույցի առաջարկած շերտերով (&gt;30, 20–30, 10–20, &lt;10 կմ/ժ)։<br>• Հրազդանի կամուրջներ՝ նեղ տեղեր (արագությունը ×0,75), կրկնակի կայանում՝ եզրային խոչընդոտներ։<br>• 22.04.2026-ի դեպքը՝ առանձին սցենար, ոչ սովորական օր։</p>
+ <h3>Ինչպես է օգտագործված մոդելում</h3><p class="note">• Ճանապարհին մեքենաներ = ֆլոտ (343–365 հազ.) × 88% × ճանապարհին լինելու բաժին × 12 շրջանի բաժին (երկուսն էլ ենթադրություն, «Հոսք» ներդիրում)։<br>• Քաղաքային ավտոբուսներ, միկրոավտոբուսներ, տրոլեյբուսներ՝ աշխատող քանակով (632/81, հանգստյան օրը՝ 502/61) × տարածքի բաժին (90%), կանգառներով։<br>• Պիկային պատուհաններ՝ 07:30–09:30 և 17:00–19:00։<br>• Խցանման գույներ՝ զեկույցի առաջարկած շերտերով (&gt;30, 20–30, 10–20, &lt;10 կմ/ժ)։<br>• Հրազդանի կամուրջներ՝ նեղ տեղեր (արագությունը ×0,75), կրկնակի կայանում՝ եզրային խոչընդոտներ։<br>• 22.04.2026-ի դեպքը՝ առանձին սցենար, ոչ սովորական օր։</p>
  <h3>Ենթադրություններ (զեկույցում չկան)</h3><div class="ref">${Object.entries(D.model_assumptions).map(([k,v])=>`<div class="r"><span>${esc(v.note)}</span><b>${v.value!=null?(v.value<1?+(v.value*100).toFixed(1)+'%':v.value):''}</b></div>`).join('')}</div>
  <h3>Հանրությանը հասանելի չէ</h3><p class="note">${D.not_available.map(esc).join(' · ')}</p>
  <h3>Աղբյուրների ցանկ</h3><p class="note">${Object.entries(D.sources).map(([k,v])=>`<b>${k}</b> ${esc(v)}`).join('<br>')}</p>`;
@@ -813,7 +867,7 @@ function hud(){
  const dm=document.getElementById('dmark');if(dm){dm.setAttribute('x1',h/24*288);dm.setAttribute('x2',h/24*288)}
  if(document.activeElement!==$('tod'))$('tod').value=Math.floor((S.t%86400)/60);
  const CAT={car:'car',pcar:'car',taxi:'taxi',ptaxi:'taxi',bus:'bus',cbus:'bus',mini:'bus',trol:'bus',van:'fr',truck:'fr'};const sp={car:[0,0],taxi:[0,0],bus:[0,0],fr:[0,0]};for(const v of veh){const k=CAT[v.k];if(!k)continue;sp[k][0]+=v.v;sp[k][1]++}
- $('st-n').textContent=(veh.length-count.block).toLocaleString('en');
+ $('st-n').textContent=(veh.length-count.block).toLocaleString('en');{const tg=Math.round(S.dens*demand(h)*(S.weekend?.75:1));$('nowcnt').innerHTML=`Հիմա ճանապարհին՝ <b class="num">${(veh.length-count.block).toLocaleString('en')}</b> (թիրախ ${tg.toLocaleString('en')}, ֆլոտի ${(tg/S.fleet*100).toFixed(1)}%)`}
  for(const [k,id] of [['car','c'],['taxi','t'],['bus','b'],['fr','f']]){$('st-'+id+'n').textContent=sp[k][1];$('st-'+id+'v').textContent=sp[k][1]?(sp[k][0]/sp[k][1]*KMH).toFixed(1):'–'}
  $('st-stuck').textContent=stats.stuck;
  const ds=districts.map(()=>[0,0]);let kc=[0,0];for(const v of veh){if(v.k!=='car'&&v.k!=='pcar')continue;const d=v.L.dist;if(d>=0){ds[d][0]+=v.v;ds[d][1]++}}
@@ -831,7 +885,7 @@ function hud(){
   $('spark').innerHTML=`<text x="0" y="9" fill="#93a0b4" font-size="9">միջին արագություն, վերջին ~1 ժամ</text>`+line(0,'#c9ced6')+line(1,'#ffcc33')+line(2,'#4c8dff')}
  // pair bar
  const act=pairs.filter(p=>!p.done);const pb=$('pairbar');
- if(act.length){const p=act[act.length-1];const el=S.t-p.t0;const prog=v=>v&&!v.dead?Math.round((v.arcBase+v.s)/p.path.reduce((a,L)=>a+L.len,0)*100)+'%':'✓';
+ if(act.length){const p=act[act.length-1];const el=S.t-p.t0;const prog=v=>v&&!v.dead?Math.round((v.arcBase+v.s)/(v.path||p.path).reduce((a,L)=>a+L.len,0)*100)+'%':'✓';
   pb.style.display='flex';pb.innerHTML=`<b>${esc(p.label)}</b><span class="num">${fmtT(el)}</span><span class="p"><i class="sw" style="background:#ff2a1f"></i>Մեքենա ${p.res.car?'<b class="num">'+fmtT(p.res.car)+'</b>':prog(p.car)}</span><span class="p"><i class="sw" style="background:#ffd400"></i>Տաքսի ${p.res.taxi?'<b class="num">'+fmtT(p.res.taxi)+'</b>':prog(p.taxi)}</span>${p.need>2?`<span class="p"><i class="sw" style="background:#2f6fe0"></i>Ավտոբուս ${p.res.bus?'<b class="num">'+fmtT(p.res.bus)+'</b>':prog(p.bus)}</span>`:''}`}
  else pb.style.display='none';
 }
@@ -839,7 +893,7 @@ function hud(){
 // ================= RENDER VEHICLES =================
 const M=new THREE.Matrix4();
 function drawVehicles(dt){
- const idx={};for(const k in TYPES)idx[k]=0;let pins=0;
+ const idx={};for(const k in TYPES)idx[k]=0;let pins=0,nb=0;const bscale=Math.max(1.2,Math.min(13,cam.dist/260));
  for(const v of veh){
   const target=off(v.L,v.lane);const d=target-v.lat;const st=Math.min(Math.abs(d),dt*(isTaxi(v)?2.6:1.8));v.lat+=Math.sign(d)*st;
   posAt(v.L,Math.max(0,v.s-v.len/2),v.lat,tmpP);
@@ -847,12 +901,13 @@ function drawVehicles(dt){
   let dx=tmpP.dx,dz=tmpP.dz;if(Math.abs(d)>.05){const k=Math.sign(d)*.18;const nx=dx-dz*k,nz=dz+dx*k;const l=Math.hypot(nx,nz);dx=nx/l;dz=nz/l}
   const T=v.T;const i=idx[v.k]++;M.set(dx,0,-dz,tmpP.x, 0,1,0,0, dz,0,dx,tmpP.z, 0,0,0,1);T.mesh.setMatrixAt(i,M);
   if(v.pair&&pins<120){M.set(1,0,0,tmpP.x,0,1,0,0,0,0,1,tmpP.z,0,0,0,1);pinMesh.setMatrixAt(pins,M);pinMesh.setColorAt(pins,new THREE.Color(v.k==='pcar'?0xff2a1f:v.k==='ptaxi'?0xffd400:0x2f6fe0));pins++}
+  if(S.accent&&ACC.has(v.k)&&nb<14000){const sc=bscale;M.set(sc,0,0,tmpP.x,0,sc*(v.k==='taxi'||v.k==='ptaxi'?1:1.25),0,4+sc*2.2,0,0,sc,tmpP.z,0,0,0,1);beacon.setMatrixAt(nb,M);beacon.setColorAt(nb,BCOL[v.k]);nb++}
   if(v===sel&&S.follow){const k=Math.min(1,dt*3);cam.x+=(tmpP.x-cam.x)*k;cam.z+=(tmpP.z-cam.z)*k}
  }
  // selected (non-pair) pin
  if(sel&&!sel.pair&&pins<120){posAt(sel.L,sel.s,sel.lat,tmpP);M.set(1,0,0,tmpP.x,0,1,0,0,0,0,1,tmpP.z,0,0,0,1);pinMesh.setMatrixAt(pins,M);pinMesh.setColorAt(pins,new THREE.Color(0x5cf2c0));pins++}
  for(const [k,T] of Object.entries(TYPES)){T.mesh.count=idx[k];T.mesh.instanceMatrix.needsUpdate=true}
- pinMesh.count=pins;pinMesh.instanceMatrix.needsUpdate=true;if(pinMesh.instanceColor)pinMesh.instanceColor.needsUpdate=true;
+ pinMesh.count=pins;pinMesh.instanceMatrix.needsUpdate=true;beacon.count=nb;beacon.instanceMatrix.needsUpdate=true;if(beacon.instanceColor)beacon.instanceColor.needsUpdate=true;if(pinMesh.instanceColor)pinMesh.instanceColor.needsUpdate=true;
 }
 function drawSignals(){const G=new THREE.Color(0x3ee06a),Y=new THREE.Color(0xffc21a),R=new THREE.Color(0xff3030);sigLinks.forEach((L,i)=>{const s=sigState(L);sigMesh.setColorAt(i,s===0?G:s===1?Y:R)});sigMesh.instanceColor.needsUpdate=true}
 
@@ -880,9 +935,10 @@ function frame(now){
  const _t1=performance.now();drawVehicles(rdt);const _t2=performance.now();
  sigT+=rdt;if(sigT>.25){sigT=0;drawSignals()}
  lightT+=rdt;if(lightT>1){lightT=0;lighting();hud();updateCongestion();links.forEach(L=>{L.vs*=.5;L.vn*=.5})}
+ {const k=Math.max(1,cam.dist/500);abMk.A.scale.setScalar(k);abMk.B.scale.setScalar(k)}
  applyCam();renderer.render(scene,camera);const _t3=performance.now();PERF.sim=PERF.sim*.9+(_t1-_t0)*.1;PERF.draw=PERF.draw*.9+(_t2-_t1)*.1;PERF.render=PERF.render*.9+(_t3-_t2)*.1;requestAnimationFrame(frame);
 }
-window.SIM={S,veh,cam,links,count,stats,PERF,stepSim,manageSpawns,startPair,routes,pairs,sigs,districts,removeVeh};renderData();hud();requestAnimationFrame(frame);
+window.SIM={runAB,shortestPath,tripTime,lastAB:()=>lastAB,S,veh,cam,links,count,stats,PERF,stepSim,manageSpawns,startPair,routes,pairs,sigs,districts,removeVeh};renderData();hud();requestAnimationFrame(frame);
 }
 }
 </script>

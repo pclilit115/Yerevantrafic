@@ -4,7 +4,7 @@ Output: out/net.json
 """
 import json, math, heapq, collections, re
 
-R = json.load(open('data2/roads.json'))
+R = json.load(open('data4/roads.json'))
 COR = json.load(open('data/corridor.json'))
 K = json.load(open('data/kml.json'))
 

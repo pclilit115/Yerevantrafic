@@ -1,83 +1,304 @@
 {
-  "title": "Yerevan Traffic & Mobility Data Report",
-  "source_file": "Yerevan_Traffic_Mobility_Data_Report_2026.pdf",
-  "research_cutoff": "2026-11-24",
-  "fleet": {
-    "registered_vehicles": {"value": 343220, "date": "2025-09-01", "note": "Registered vehicles, not daily active traffic", "src": "S1,S6"},
-    "registered_change_yoy": {"value": 11906, "src": "S1"},
-    "national_registered": {"value": 953965, "src": "S1"},
-    "passenger_share": {"value": 0.88, "note": "Light passenger vehicles share of Yerevan registered fleet (1 Sep 2025 data, 2026 academic article)"}
+ "title": "Yerevan Traffic & Mobility Data Report",
+ "source_file": "Yerevan_Traffic_Mobility_Data_Report_2026.pdf",
+ "research_cutoff": "2026-11-24",
+ "fleet": {
+  "registered_vehicles": {
+   "value": 343220,
+   "date": "2025-09-01",
+   "note": "Registered vehicles, not daily active traffic",
+   "src": "S1,S6"
   },
-  "public_transport": [
-    {"mode": "bus", "routes": 64, "fleet": 752, "weekday_operating": 632, "weekend_operating": 502, "src": "S1"},
-    {"mode": "minibus", "routes": 11, "fleet": 94, "weekday_operating": 81, "weekend_operating": 61, "src": "S1"},
-    {"mode": "trolleybus", "routes": 10, "fleet": 60, "weekday_operating": null, "weekend_operating": null, "src": "S1"},
-    {"mode": "metro", "stations": 10, "note": "Grade-separated, not road traffic"}
-  ],
-  "fleet_acquisitions_2020_2024": {"gazelle_city": 100, "zhong_tong_medium": 562, "man_large": 87, "trolley_yutong": 15, "trolley_zhong_tong": 15},
-  "ridership_2022_million": {"bus": 74.1, "minibus": 44.2, "trolleybus": 4.3975, "metro": 23.317, "total": 146.0165, "src": "S11"},
-  "speeds": {
-    "car_average_kmh": {"value": 23.5, "previous": 25, "note": "Mayor, 29 Jun 2026, citing 2025 Traffic Management Center data", "src": "S5"},
-    "car_peak_kmh": {"value": 10, "note": "As low as 10 km/h at peak; no street-level breakdown", "src": "S5"},
-    "centre_rush_kmh": {"min": 10, "max": 20, "src": "S6"},
-    "pt_peak_2023_kmh": {"bus": 20.6, "minibus": 20.8, "trolleybus": 14.8, "note": "Primary thoroughfares, 2023", "src": "S10"},
-    "pt_peak_2017_kmh": {"bus": 20.2, "minibus": 20.8, "trolleybus": 14.8, "src": "S9"}
+  "registered_change_yoy": {
+   "value": 11906,
+   "src": "S1"
   },
-  "time_slices": [
-    {"from": "06:00", "to": "07:30", "use": "Early build-up / moderate flow", "confidence": "assumption"},
-    {"from": "07:30", "to": "09:30", "use": "Morning peak", "confidence": "peak period supported"},
-    {"from": "09:30", "to": "16:30", "use": "Inter-peak / variable flow", "confidence": "assumption"},
-    {"from": "16:30", "to": "19:00", "use": "Evening peak", "confidence": "assumption"},
-    {"from": "19:00", "to": "22:00", "use": "Evening decline", "confidence": "assumption"},
-    {"from": "22:00", "to": "06:00", "use": "Low-flow baseline", "confidence": "assumption"}
-  ],
-  "congestion_corridors": [
-    {"road": "Isakov Avenue", "evidence": "Near-gridlock 22 Apr 2026, 08:00-08:30", "src": "S7"},
-    {"road": "Sebastia Street", "evidence": "Heavy congestion, same event", "src": "S7"},
-    {"road": "Leningradyan Street", "evidence": "Heavy congestion, same event", "src": "S7"},
-    {"road": "Tsitsernakaberd Highway", "evidence": "Heavy congestion, same event", "src": "S7"},
-    {"road": "Orbeli Street", "evidence": "Heavy congestion, same event", "src": "S7"},
-    {"road": "Baghramyan Avenue", "evidence": "Heavy congestion, same event", "src": "S7"},
-    {"road": "Hrazdan River bridge approaches", "evidence": "Limited bridges are bottlenecks (ADB 2020)", "src": "S8"}
-  ],
-  "bus_lanes": [
-    {"corridor": "Mashtots - Khorenatsi - Beirut - Italy - Argishti", "status": "Continuous lane announced as implemented, 7 Jul 2025", "src": "S3"},
-    {"corridor": "Kentron - Arshakunyats - Garegin Nzhdeh - Bagratunyats", "status": "Proposed / discussed Oct 2024"},
-    {"corridor": "Nor Nork - Arabkir - Malatia-Sebastia", "status": "Option under discussion Oct 2024"}
-  ],
-  "speed_bands_kmh": [
-    {"state": "Free flow", "min": 30},
-    {"state": "Slow", "min": 20, "max": 30},
-    {"state": "Heavy", "min": 10, "max": 20},
-    {"state": "Severe", "max": 10}
-  ],
-  "other": {
-    "delay_reduction_2025": {"peak_slowdowns": 0.133, "average_slowdowns": 0.257, "src": "S4"},
-    "capacity_2009": {"over_capacity_share": 0.20, "near_limit_share": 0.35, "note": "Historic, not a 2026 map", "src": "S8"},
-    "pt_validations_sep_2026_first_week_million": 3.6
+  "national_registered": {
+   "value": 953965,
+   "src": "S1"
   },
-  "not_available": ["vehicles/hour per street segment", "speed by street and hour", "queue length", "daily active vehicles vs registered", "complete bus-lane GIS with hours/direction"],
-  "sources": {
-    "S1": "Yerevan Municipality - Transport Department: route network, fleet inventory, weekday operating counts",
-    "S2": "Yerevan Municipality - Yerevan Traffic Management Center",
-    "S3": "Yerevan Municipality - traffic management changes, 7 Jul 2025 (Mashtots-Khorenatsi-Beirut-Italy-Argishti corridor)",
-    "S4": "Yerevan Municipality - recent changes in traffic management, 11 Sep 2025",
-    "S5": "ArmInfo, 29 Jun 2026 - Mayor's statement on average and peak car speed",
-    "S6": "Yerevan for People - traffic & car dominance, 14 Oct 2026",
-    "S7": "Panorama.am, 22 Apr 2026 - morning gridlock 08:00-08:30",
-    "S8": "ADB / Yerevan Municipality - IEE, Yerevan Bus Depot Project, 2020",
-    "S9": "Yerevan Green City Action Plan, 2017",
-    "S10": "ADB SUDIP Tranche 2 progress, Dec 2024 - 2023 PT peak speeds",
-    "S11": "SDG Spotlight Report, Armenia 2023 - PT ridership",
-    "S12": "Yerevan for People - Armenian-language traffic dossier"
+  "passenger_share": {
+   "value": 0.88,
+   "note": "Light passenger vehicles share of Yerevan registered fleet (1 Sep 2025 data, 2026 academic article)"
+  }
+ },
+ "public_transport": [
+  {
+   "mode": "bus",
+   "routes": 64,
+   "fleet": 752,
+   "weekday_operating": 632,
+   "weekend_operating": 502,
+   "src": "S1"
   },
-  "model_assumptions": {
-    "on_road_share_at_peak": {"value": 0.05, "note": "Assumption, calibrated so the model matches the report speeds (not in report)"},
-    "model_area_share": {"value": 0.65, "note": "Assumption: share of peak traffic within the 6 modelled districts (centre + adjoining)"},
-    "pt_area_share": {"value": 0.5, "note": "Assumption: share of operating PT vehicles inside the modelled area"},
-    "vehicle_class_split": {"taxi": 0.15, "van": 0.05, "truck": 0.015, "note": "Assumption - report says class split must be measured or declared"},
-    "weekend_demand_factor": {"value": 0.75, "note": "Assumption"},
-    "hot_streets_share": {"value": 0.6, "note": "Assumption: share of traffic on the named congested streets"}
+  {
+   "mode": "minibus",
+   "routes": 11,
+   "fleet": 94,
+   "weekday_operating": 81,
+   "weekend_operating": 61,
+   "src": "S1"
   },
-  "calibration_result": {"note": "Local test, weekday, 25-min windows", "daily_car_kmh": 22.8, "peak_car_kmh": 19.9, "peak_centre_kmh": 13.0, "peak_hot_streets_kmh": 15.8, "peak_bus_kmh": 19.3, "peak_minibus_kmh": 20.2, "peak_trolleybus_kmh": 13.6, "night_car_kmh": 32.8}
+  {
+   "mode": "trolleybus",
+   "routes": 10,
+   "fleet": 60,
+   "weekday_operating": null,
+   "weekend_operating": null,
+   "src": "S1"
+  },
+  {
+   "mode": "metro",
+   "stations": 10,
+   "note": "Grade-separated, not road traffic"
+  }
+ ],
+ "fleet_acquisitions_2020_2024": {
+  "gazelle_city": 100,
+  "zhong_tong_medium": 562,
+  "man_large": 87,
+  "trolley_yutong": 15,
+  "trolley_zhong_tong": 15
+ },
+ "ridership_2022_million": {
+  "bus": 74.1,
+  "minibus": 44.2,
+  "trolleybus": 4.3975,
+  "metro": 23.317,
+  "total": 146.0165,
+  "src": "S11"
+ },
+ "speeds": {
+  "car_average_kmh": {
+   "value": 23.5,
+   "previous": 25,
+   "note": "Mayor, 29 Jun 2026, citing 2025 Traffic Management Center data",
+   "src": "S5"
+  },
+  "car_peak_kmh": {
+   "value": 10,
+   "note": "As low as 10 km/h at peak; no street-level breakdown",
+   "src": "S5"
+  },
+  "centre_rush_kmh": {
+   "min": 10,
+   "max": 20,
+   "src": "S6"
+  },
+  "pt_peak_2023_kmh": {
+   "bus": 20.6,
+   "minibus": 20.8,
+   "trolleybus": 14.8,
+   "note": "Primary thoroughfares, 2023",
+   "src": "S10"
+  },
+  "pt_peak_2017_kmh": {
+   "bus": 20.2,
+   "minibus": 20.8,
+   "trolleybus": 14.8,
+   "src": "S9"
+  }
+ },
+ "time_slices": [
+  {
+   "from": "06:00",
+   "to": "07:30",
+   "use": "Early build-up / moderate flow",
+   "confidence": "assumption"
+  },
+  {
+   "from": "07:30",
+   "to": "09:30",
+   "use": "Morning peak",
+   "confidence": "peak period supported"
+  },
+  {
+   "from": "09:30",
+   "to": "16:30",
+   "use": "Inter-peak / variable flow",
+   "confidence": "assumption"
+  },
+  {
+   "from": "16:30",
+   "to": "19:00",
+   "use": "Evening peak",
+   "confidence": "assumption"
+  },
+  {
+   "from": "19:00",
+   "to": "22:00",
+   "use": "Evening decline",
+   "confidence": "assumption"
+  },
+  {
+   "from": "22:00",
+   "to": "06:00",
+   "use": "Low-flow baseline",
+   "confidence": "assumption"
+  }
+ ],
+ "congestion_corridors": [
+  {
+   "road": "Isakov Avenue",
+   "evidence": "Near-gridlock 22 Apr 2026, 08:00-08:30",
+   "src": "S7"
+  },
+  {
+   "road": "Sebastia Street",
+   "evidence": "Heavy congestion, same event",
+   "src": "S7"
+  },
+  {
+   "road": "Leningradyan Street",
+   "evidence": "Heavy congestion, same event",
+   "src": "S7"
+  },
+  {
+   "road": "Tsitsernakaberd Highway",
+   "evidence": "Heavy congestion, same event",
+   "src": "S7"
+  },
+  {
+   "road": "Orbeli Street",
+   "evidence": "Heavy congestion, same event",
+   "src": "S7"
+  },
+  {
+   "road": "Baghramyan Avenue",
+   "evidence": "Heavy congestion, same event",
+   "src": "S7"
+  },
+  {
+   "road": "Hrazdan River bridge approaches",
+   "evidence": "Limited bridges are bottlenecks (ADB 2020)",
+   "src": "S8"
+  }
+ ],
+ "bus_lanes": [
+  {
+   "corridor": "Mashtots - Khorenatsi - Beirut - Italy - Argishti",
+   "status": "Continuous lane announced as implemented, 7 Jul 2025",
+   "src": "S3"
+  },
+  {
+   "corridor": "Kentron - Arshakunyats - Garegin Nzhdeh - Bagratunyats",
+   "status": "Proposed / discussed Oct 2024"
+  },
+  {
+   "corridor": "Nor Nork - Arabkir - Malatia-Sebastia",
+   "status": "Option under discussion Oct 2024"
+  }
+ ],
+ "speed_bands_kmh": [
+  {
+   "state": "Free flow",
+   "min": 30
+  },
+  {
+   "state": "Slow",
+   "min": 20,
+   "max": 30
+  },
+  {
+   "state": "Heavy",
+   "min": 10,
+   "max": 20
+  },
+  {
+   "state": "Severe",
+   "max": 10
+  }
+ ],
+ "other": {
+  "delay_reduction_2025": {
+   "peak_slowdowns": 0.133,
+   "average_slowdowns": 0.257,
+   "src": "S4"
+  },
+  "capacity_2009": {
+   "over_capacity_share": 0.2,
+   "near_limit_share": 0.35,
+   "note": "Historic, not a 2026 map",
+   "src": "S8"
+  },
+  "pt_validations_sep_2026_first_week_million": 3.6
+ },
+ "not_available": [
+  "vehicles/hour per street segment",
+  "speed by street and hour",
+  "queue length",
+  "daily active vehicles vs registered",
+  "complete bus-lane GIS with hours/direction"
+ ],
+ "sources": {
+  "S1": "Yerevan Municipality - Transport Department: route network, fleet inventory, weekday operating counts",
+  "S2": "Yerevan Municipality - Yerevan Traffic Management Center",
+  "S3": "Yerevan Municipality - traffic management changes, 7 Jul 2025 (Mashtots-Khorenatsi-Beirut-Italy-Argishti corridor)",
+  "S4": "Yerevan Municipality - recent changes in traffic management, 11 Sep 2025",
+  "S5": "ArmInfo, 29 Jun 2026 - Mayor's statement on average and peak car speed",
+  "S6": "Yerevan for People - traffic & car dominance, 14 Oct 2026",
+  "S7": "Panorama.am, 22 Apr 2026 - morning gridlock 08:00-08:30",
+  "S8": "ADB / Yerevan Municipality - IEE, Yerevan Bus Depot Project, 2020",
+  "S9": "Yerevan Green City Action Plan, 2017",
+  "S10": "ADB SUDIP Tranche 2 progress, Dec 2024 - 2023 PT peak speeds",
+  "S11": "SDG Spotlight Report, Armenia 2023 - PT ridership",
+  "S12": "Yerevan for People - Armenian-language traffic dossier"
+ },
+ "model_assumptions": {
+  "on_road_share_at_peak": {
+   "value": 0.05,
+   "note": "Assumption, calibrated so the model matches the report speeds (not in report)"
+  },
+  "model_area_share": {
+   "value": 0.95,
+   "note": "Assumption: share of peak traffic inside the 12 modelled districts (whole city)"
+  },
+  "pt_area_share": {
+   "value": 0.9,
+   "note": "Assumption: share of operating PT vehicles inside the modelled area"
+  },
+  "vehicle_class_split": {
+   "taxi": 0.15,
+   "van": 0.05,
+   "truck": 0.015,
+   "note": "Assumption - report says class split must be measured or declared"
+  },
+  "weekend_demand_factor": {
+   "value": 0.75,
+   "note": "Assumption"
+  },
+  "hot_streets_share": {
+   "value": 0.45,
+   "note": "Assumption: share of traffic on the named congested streets"
+  },
+  "fleet_range": {
+   "value": null,
+   "note": "Ֆլոտի սահիչ՝ 343 000–365 000 (343 220՝ զեկույց, 01.09.2025; վերին սահմանը՝ օգտատիրոջ նշած գնահատական)"
+  },
+  "bus_lane_taxi_speed_peak": {
+   "value": 27,
+   "note": "Իրական կյանքի գնահատման մեջ տաքսու արագությունը ավտոբուսի գծում պիկին, կմ/ժ (ավտոբուս 20,6 կմ/ժ՝ կանգառներով)"
+  }
+ },
+ "calibration_result": {
+  "note": "Local test, weekday, 25-min windows",
+  "daily_car_kmh": 22.8,
+  "peak_car_kmh": 19.9,
+  "peak_centre_kmh": 13.0,
+  "peak_hot_streets_kmh": 15.8,
+  "peak_bus_kmh": 19.3,
+  "peak_minibus_kmh": 20.2,
+  "peak_trolleybus_kmh": 13.6,
+  "night_car_kmh": 32.8,
+  "v9_12_districts": {
+   "daily_car_kmh": 23.7,
+   "kentron_peak_kmh": 13.1,
+   "hot_streets_peak_kmh": 15.1,
+   "bus_peak_kmh": 20.0,
+   "minibus_peak_kmh": 21.5,
+   "trolleybus_peak_kmh": 15.5,
+   "bus_lane_lane0_peak_kmh": 27.8,
+   "vehicles_peak": 14232
+  }
+ }
 }

@@ -246,8 +246,8 @@
  },
  "model_assumptions": {
   "on_road_share_at_peak": {
-   "value": 0.2,
-   "note": "Assumption (user request v10): share of the fleet on the road at peak → ≈57,000 vehicles (slider up to 30% ≈ 86,000). Speeds then fall well below the report averages."
+   "value": 0.22,
+   "note": "Assumption (user request): share of fleet on road at peak → ≈63,000 vehicles. Speeds fall well below report averages."
   },
   "model_area_share": {
    "value": 0.95,
@@ -276,8 +276,16 @@
    "note": "Ֆլոտի սահիչ՝ 343 000–365 000 (343 220՝ զեկույց, 01.09.2025; վերին սահմանը՝ օգտատիրոջ նշած գնահատական)"
   },
   "bus_lane_taxi_speed_peak": {
-   "value": 27,
-   "note": "Իրական կյանքի գնահատման մեջ տաքսու արագությունը ավտոբուսի գծում պիկին, կմ/ժ (ավտոբուս 20,6 կմ/ժ՝ կանգառներով)"
+   "value": 30,
+   "note": "Bus-lane taxi speed used in the real-life estimate at any hour (= off-peak), km/h"
+  },
+  "taxi_share": {
+   "value": 0.05,
+   "note": "Share of taxis among background traffic (user request: fewer taxis)"
+  },
+  "bus_lane_priority": {
+   "value": 8,
+   "note": "Transit signal priority for bus-lane vehicles: green 8 s earlier and 8 s longer; dwelling buses do not block the lane"
   }
  },
  "calibration_result": {
@@ -299,6 +307,14 @@
    "trolleybus_peak_kmh": 15.5,
    "bus_lane_lane0_peak_kmh": 27.8,
    "vehicles_peak": 14232
+  },
+  "v11_bus_lane_free": {
+   "vehicles_peak": 60600,
+   "taxi_bus_lane_peak_kmh": 30.4,
+   "taxi_bus_lane_midday_kmh_before": 29.9,
+   "pt_bus_lane_peak_kmh": 24.2,
+   "car_hot_streets_peak_kmh": 5.2,
+   "car_other_peak_kmh": 12.5
   }
  }
 }

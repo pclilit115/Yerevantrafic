@@ -126,7 +126,7 @@ th{color:var(--mute);font-weight:600}
    <div class="ref" style="margin-top:0"><div class="r"><span>Գրանցված մեքենաներ, Երևան (01.09.2025)</span><b>343 220</b></div><div class="r"><span>Մարդատար՝ ≈88%</span><b id="fleet88">302 034</b></div><div class="r"><span>Մոդելում պիկին ճանապարհին</span><b id="fleetcalc">–</b></div></div>
    <div class="sl"><label>Երևանում գրանցված մեքենաներ <b id="v-fleet">343,220</b></label><input type="range" id="fleet" min="343000" max="365000" step="1000" value="343220"></div>
    <p class="note">Միջակայքը՝ 343–365 հազար. 343 220-ը զեկույցի պաշտոնական թիվն է (01.09.2025), վերին սահմանը՝ աճը ներառող գնահատական։</p>
-   <div class="sl"><label>Ֆլոտի որ մասն է միաժամանակ ճանապարհին պիկին <b id="v-onroad">5%</b></label><input type="range" id="onroad" min="2" max="15" step=".5" value="5"></div>
+   <div class="sl"><label>Ֆլոտի որ մասն է միաժամանակ ճանապարհին պիկին (20% ≈ 57 000, 28% ≈ 80 000) <b id="v-onroad">20%</b></label><input type="range" id="onroad" min="2" max="30" step=".5" value="20"></div>
    <div class="sl"><label>Այդ հոսքի որ մասն է քաղաքի ներսում (12 շրջան) <b id="v-area">95%</b></label><input type="range" id="area" min="30" max="100" step="5" value="95"></div>
    <p class="note">343 220-ը գրանցված մեքենաների թիվն է, ոչ թե միաժամանակ երթևեկողների (զեկույցի զգուշացումը)։ Երկու սահիչները մոդելային ենթադրություններ են. լռելյայն արժեքներով մոդելը մոտենում է զեկույցի արագություններին։</p>
    <h3>Ծանրաբեռնված փողոցներ</h3>
@@ -239,7 +239,7 @@ const fmtT=s=>{s=Math.round(s);const m=Math.floor(s/60),x=s%60;return m+':'+Stri
 const clockStr=t=>{t=((t%86400)+86400)%86400;const h=Math.floor(t/3600),m=Math.floor(t%3600/60);return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')};
 
 // ---------- state / settings ----------
-const S={play:true,speed:10,t:8.5*3600,dens:14000,fleet:343220,onroad:.05,hot:.45,hotStay:4,hotOn:true,area:.95,ptShare:.9,dpark:60,event:false,weekend:false,tshare:.15,vcar:60,vtaxi:65,vbus:50,aggr:7,park:true,sig:'fixed',scen:'prop',taxiBus:true,accent:true,head:6,dwell:12,day24:false,withBus:true,follow:false};
+const S={play:true,speed:10,t:8.5*3600,dens:26000,fleet:343220,onroad:.2,hot:.45,hotStay:4,hotOn:true,area:.95,ptShare:.9,dpark:60,event:false,weekend:false,tshare:.15,vcar:60,vtaxi:65,vbus:50,aggr:7,park:true,sig:'fixed',scen:'prop',taxiBus:true,accent:true,head:6,dwell:12,day24:false,withBus:true,follow:false};
 const DEM=[.12,.08,.06,.06,.07,.12,.32,.62,1,.92,.66,.6,.62,.64,.62,.64,.8,1,1,.7,.5,.38,.26,.17]; // peaks 07:30–09:30, 17:00–19:00 (report §3.3)
 const demand=h=>{const a=Math.floor(h)%24,b=(a+1)%24,f=h-Math.floor(h);return DEM[a]*(1-f)+DEM[b]*f};
 const period=h=>h<6?'Ցածր հոսք (գիշեր)':h<7.5?'Աճող հոսք':h<9.5?'Առավոտյան պիկ':h<16.5?'Միջպիկային':h<19?'Երեկոյան պիկ':h<22?'Երեկոյան նվազում':'Ցածր հոսք (գիշեր)';
@@ -461,18 +461,18 @@ const sigMesh=(()=>{const g=new THREE.BoxGeometry(1.2,1.2,1.2);g.translate(0,5,0
 function taxiGeo(){const a=carGeo(4.5,1.8,1.5,.55);const s=new THREE.BoxGeometry(.9,.42,1.0);s.translate(-.2,1.5+.21+.25,0);return merge([a,s])}
 function carGeo(l,w,h,cab){const a=new THREE.BoxGeometry(l,h*.55,w);a.translate(0,h*.275+.25,0);const parts=[a];if(cab){const b=new THREE.BoxGeometry(l*cab,h*.45,w*.86);b.translate(-l*.05,h*.55+h*.225+.25,0);parts.push(b)}return merge(parts)}
 function merge(gs){const pos=[],nor=[];for(const g of gs){const n=g.index?g.toNonIndexed():g;pos.push(...n.attributes.position.array);nor.push(...n.attributes.normal.array)}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(nor,3));return g}
-const MAXV=30000;
+const MAXV=90000;
 const TYPES={
  car:{geo:carGeo(4.4,1.8,1.5,.55),max:MAXV,len:4.6,a:1.6,b:2.2,s0:2,T:1.35},
- taxi:{geo:taxiGeo(),max:8000,len:4.6,a:2.1,b:2.6,s0:1.6,T:1.05,color:0xffc61a},
+ taxi:{geo:taxiGeo(),max:22000,len:4.6,a:2.1,b:2.6,s0:1.6,T:1.05,color:0xffc61a},
  bus:{geo:carGeo(12,2.55,3.1,0),max:400,len:12.5,a:1.0,b:1.6,s0:2.5,T:1.5,color:0x2f6fe0},
  pcar:{geo:carGeo(4.4,1.8,1.5,.55),max:60,len:4.6,a:1.6,b:2.2,s0:2,T:1.35,color:0xff2a1f},
  ptaxi:{geo:taxiGeo(),max:60,len:4.6,a:2.1,b:2.6,s0:1.6,T:1.05,color:0xffd400},
  cbus:{geo:carGeo(11,2.5,3.0,0),max:1000,len:11.5,a:1.0,b:1.6,s0:2.5,T:1.5,color:0x3f86e8},
  mini:{geo:carGeo(6.4,2.1,2.6,0),max:200,len:6.8,a:1.4,b:2.2,s0:2,T:1.2,color:0xf0dc8a},
  trol:{geo:carGeo(12,2.55,3.3,0),max:150,len:12.5,a:.9,b:1.5,s0:2.5,T:1.6,color:0x19a596},
- van:{geo:carGeo(5.4,2.0,2.2,.7),max:2500,len:5.7,a:1.3,b:2.0,s0:2,T:1.4,color:0xdfe3e8},
- truck:{geo:carGeo(8.5,2.5,3.2,.3),max:900,len:9,a:.8,b:1.6,s0:2.5,T:1.7,color:0x9a7650},
+ van:{geo:carGeo(5.4,2.0,2.2,.7),max:7000,len:5.7,a:1.3,b:2.0,s0:2,T:1.4,color:0xdfe3e8},
+ truck:{geo:carGeo(8.5,2.5,3.2,.3),max:2500,len:9,a:.8,b:1.6,s0:2.5,T:1.7,color:0x9a7650},
  block:{geo:carGeo(4.4,1.8,1.5,.55),max:600,len:4.6,a:1,b:1,s0:1,T:1,color:0xff8a1c},
 };
 const CARCOL=[0xd9dce0,0xb9bec6,0x8d9299,0x5b5f66,0x3e4248,0xc9c4ba,0xa9aeb5,0x6f747b,0xe6e6e6,0x2c2f33];
@@ -485,8 +485,8 @@ for(const [k,T] of Object.entries(TYPES)){
 // beacons over taxis and public transport (scale with camera distance)
 const ACC=new Set(['taxi','ptaxi','bus','cbus','mini','trol']);
 const bgeo=new THREE.OctahedronGeometry(1,0);bgeo.scale(1,1.4,1);
-const beacon=new THREE.InstancedMesh(bgeo,new THREE.MeshBasicMaterial({transparent:true,opacity:.95,fog:false}),14000);beacon.frustumCulled=false;beacon.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-for(let i=0;i<14000;i++)beacon.setColorAt(i,new THREE.Color(0xffffff));beacon.count=0;scene.add(beacon);
+const beacon=new THREE.InstancedMesh(bgeo,new THREE.MeshBasicMaterial({transparent:true,opacity:.95,fog:false}),26000);beacon.frustumCulled=false;beacon.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+for(let i=0;i<26000;i++)beacon.setColorAt(i,new THREE.Color(0xffffff));beacon.count=0;scene.add(beacon);
 const BCOL={taxi:new THREE.Color(0xffd21a),ptaxi:new THREE.Color(0xffe600),bus:new THREE.Color(0x3d8bff),cbus:new THREE.Color(0x2f7dff),mini:new THREE.Color(0xff9f1a),trol:new THREE.Color(0x19d6c0)};
 // pins over pair vehicles
 const pinGeo=new THREE.ConeGeometry(2.2,5,10);pinGeo.rotateX(Math.PI);pinGeo.translate(0,13,0);
@@ -541,13 +541,14 @@ function spawnPT(k){const L=ptLinks[Math.floor(rnd()*ptLinks.length)];const tmp=
  const v=addVeh(k,L,s,lane,{v:3,gen:true,budget:6000+rnd()*12000});if(v){v.stops=[{arc:s+120+rnd()*300}]}}
 function spawnBlock(){const cand=dparkLinks;if(!cand.length)return;const L=cand[Math.floor(rnd()*cand.length)];const tmp={k:'car'};const lane=minLane(tmp,L);const s=15+rnd()*(L.len-30);for(const o of L.lanes[lane])if(Math.abs(o.s-s)<15)return;addVeh('block',L,s,lane,{hold:60+rnd()*180,budget:0})}
 const dparkLinks=links.filter(L=>L.cls>=1&&L.cls<=3&&L.n>=2&&L.len>50&&L.dist>=0);
-function spawnBg(){
+function spawnBg(){for(let t=0;t<4;t++)if(spawnBg1(t))return}
+function spawnBg1(tr){
  const r=rnd()*spawnW[spawnW.length-1];let lo=0,hi=spawnW.length-1;while(lo<hi){const m=(lo+hi)>>1;if(spawnW[m]<r)lo=m+1;else hi=m}
- let L=spawnLinks[lo];if(S.hotOn&&hotLinks.length&&rnd()<S.hot){const r2=rnd()*hotW[hotW.length-1];let a=0,b=hotW.length-1;while(a<b){const m=(a+b)>>1;if(hotW[m]<r2)a=m+1;else b=m}L=hotLinks[a]}
+ let L=spawnLinks[lo];if(tr<2&&S.hotOn&&hotLinks.length&&rnd()<S.hot){const r2=rnd()*hotW[hotW.length-1];let a=0,b=hotW.length-1;while(a<b){const m=(a+b)>>1;if(hotW[m]<r2)a=m+1;else b=m}L=hotLinks[a]}
  if(evtOn()&&evtLinks.length&&rnd()<.35)L=evtLinks[Math.floor(rnd()*evtLinks.length)];const q=rnd();const k=q<S.tshare?'taxi':q<S.tshare+.05?'van':q<S.tshare+.065?'truck':'car';const tmp={k};
  const lane=laneFor(tmp,L,Math.floor(rnd()*L.n));const s=5+rnd()*(L.len-10);
- const arr=L.lanes[lane];for(const o of arr)if(Math.abs(o.s-s)<14)return;
- addVeh(k,L,s,lane,{v:Math.min(L.spd,vmax(tmp))*.5});
+ const arr=L.lanes[lane];for(const o of arr)if(Math.abs(o.s-s)<11)return false;
+ addVeh(k,L,s,lane,{v:Math.min(L.spd,vmax(tmp))*.5});return true;
 }
 function sigState(L){ // 0 green, 1 yellow, 2 red
  const sg=sigs[L.sig[0]];return sg.state[L.sig[1]];
@@ -660,7 +661,7 @@ function manageSpawns(dt){
  for(const k in tg){const c=veh.reduce?count[k]:0;if(c<tg[k]){for(let i=0;i<Math.min(tg[k]-c,Math.ceil(dt*3)+(c<tg[k]*.7?40:0));i++)spawnPT(k)}else if(c>tg[k]*1.1){for(const v of veh)if(v.k===k&&rnd()<.01)v.budget=0}}
  // curbside friction / double parking (ADB 2020: illegal & double parking)
  const bt=h>=7.5&&h<21?Math.round(S.dpark*demand(h)):0;if(count.block<bt){for(let i=0;i<Math.min(bt-count.block,5);i++)spawnBlock()}
- if(bg<target){const n=Math.min(target-bg,Math.ceil(dt*40)+(bg<target*.8?300:0));for(let i=0;i<n;i++)spawnBg()}
+ if(bg<target){const n=Math.min(target-bg,Math.ceil(dt*60)+(bg<target*.85?600:0));for(let i=0;i<n;i++)spawnBg()}
  else if(bg>target*1.08){for(const v of veh)if(!v.path&&rnd()<.002)v.budget=0}
  // buses
  routes.forEach(r=>{if(!r.run)return;r.dirs.forEach(d=>{if(S.t-d.lastSpawn>=S.head*60){d.lastSpawn=S.t;spawnPathVeh('bus',d.path,{stops:d.stops,route:r})}})});
@@ -901,7 +902,7 @@ function drawVehicles(dt){
   let dx=tmpP.dx,dz=tmpP.dz;if(Math.abs(d)>.05){const k=Math.sign(d)*.18;const nx=dx-dz*k,nz=dz+dx*k;const l=Math.hypot(nx,nz);dx=nx/l;dz=nz/l}
   const T=v.T;const i=idx[v.k]++;M.set(dx,0,-dz,tmpP.x, 0,1,0,0, dz,0,dx,tmpP.z, 0,0,0,1);T.mesh.setMatrixAt(i,M);
   if(v.pair&&pins<120){M.set(1,0,0,tmpP.x,0,1,0,0,0,0,1,tmpP.z,0,0,0,1);pinMesh.setMatrixAt(pins,M);pinMesh.setColorAt(pins,new THREE.Color(v.k==='pcar'?0xff2a1f:v.k==='ptaxi'?0xffd400:0x2f6fe0));pins++}
-  if(S.accent&&ACC.has(v.k)&&nb<14000){const sc=bscale;M.set(sc,0,0,tmpP.x,0,sc*(v.k==='taxi'||v.k==='ptaxi'?1:1.25),0,4+sc*2.2,0,0,sc,tmpP.z,0,0,0,1);beacon.setMatrixAt(nb,M);beacon.setColorAt(nb,BCOL[v.k]);nb++}
+  if(S.accent&&ACC.has(v.k)&&nb<26000){const sc=bscale;M.set(sc,0,0,tmpP.x,0,sc*(v.k==='taxi'||v.k==='ptaxi'?1:1.25),0,4+sc*2.2,0,0,sc,tmpP.z,0,0,0,1);beacon.setMatrixAt(nb,M);beacon.setColorAt(nb,BCOL[v.k]);nb++}
   if(v===sel&&S.follow){const k=Math.min(1,dt*3);cam.x+=(tmpP.x-cam.x)*k;cam.z+=(tmpP.z-cam.z)*k}
  }
  // selected (non-pair) pin
@@ -916,18 +917,19 @@ function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);c
 addEventListener('resize',resize);resize();
 applyScenario();lighting();
 // warm start: fill network and run 2 sim-minutes
-for(let i=0;i<40;i++)manageSpawns(1);for(let i=0;i<240;i++){stepSim(.5);if(i%4===0)manageSpawns(2)}
+for(let i=0;i<40;i++)manageSpawns(1);for(let i=0;i<120;i++){stepSim(.5);if(i%4===0)manageSpawns(2)}
 S.t=8.5*3600;routes.forEach(r=>r.dirs.forEach(d=>d.lastSpawn=-1e9));
 renderPairs();
 $('load').style.display='none';
 let last=performance.now(),acc=0,sigT=0,lightT=0;
-let fpsN=0,fpsT=0;const PERF={sim:0,draw:0,render:0};
+let fpsN=0,fpsT=0,effSp=10;const PERF={sim:0,draw:0,render:0};
 function frame(now){
- const rdt=Math.min(.1,(now-last)/1000);last=now;fpsN++;fpsT+=rdt;if(fpsT>1){$('fps').textContent=Math.round(fpsN/fpsT)+' fps';fpsN=0;fpsT=0}
+ const rdt=Math.min(.1,(now-last)/1000);last=now;fpsN++;fpsT+=rdt;if(fpsT>1){$('fps').textContent=Math.round(fpsN/fpsT)+' fps · իրական արագացում '+Math.max(1,Math.round(effSp))+'×';fpsN=0;fpsT=0}
  if(fly){fly.t=Math.min(1,fly.t+rdt/1.2);const e=fly.t<.5?2*fly.t*fly.t:1-Math.pow(-2*fly.t+2,2)/2;for(const k of ['x','z','dist','yaw','pitch'])cam[k]=fly.from[k]+(fly.to[k]-fly.from[k])*e;if(fly.t>=1)fly=null}
  const _t0=performance.now();
  if(S.play){let simDt=rdt*S.speed;const steps=Math.min(24,Math.max(1,Math.ceil(simDt/.5)));const h=simDt/steps;
-  for(let i=0;i<steps;i++){stepSim(h);if(i%3===0)manageSpawns(h*3)}
+  let done=0;for(let i=0;i<steps;i++){stepSim(h);done++;if(i%3===0)manageSpawns(h*3);if(performance.now()-_t0>45)break}
+  effSp=effSp*.95+(done*h/rdt)*.05;
   const H=Math.floor((S.t%86400)/3600);if(H!==lastH){lastH=H;refreshParking()}
  }
  if(!S.follow)sel=sel&&sel.dead?null:sel;

@@ -246,8 +246,8 @@
  },
  "model_assumptions": {
   "on_road_share_at_peak": {
-   "value": 0.05,
-   "note": "Assumption, calibrated so the model matches the report speeds (not in report)"
+   "value": 0.2,
+   "note": "Assumption (user request v10): share of the fleet on the road at peak → ≈57,000 vehicles (slider up to 30% ≈ 86,000). Speeds then fall well below the report averages."
   },
   "model_area_share": {
    "value": 0.95,

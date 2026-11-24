@@ -1,0 +1,371 @@
+                                 YEREVAN
+                             TRAFFIC & MOBILITY
+                               DATA REPORT
+                Evidence-based reference for traffic visualization, congestion mapping
+                                   and urban mobility modelling
+
+
+
+
+             343,220                                 23.5 km/h                         10 km/h
+               Registered vehicles                   Reported average car speed       Reported peak-hour speed
+            in Yerevan · 1 Sep 2025                  in 2025 data, cited Jun 2026   in central/urban traffic context
+
+
+
+
+                                      Research cut-off: 24 November 2026
+                                      Geographic scope: Yerevan, Armenia
+                                             Language: English
+
+
+
+
+ IMPORTANT: This report separates measured or officially reported facts from indicative modelling
+ assumptions. It does not invent street-by-street vehicle counts or live traffic speeds where no public dataset
+ was found.
+
+
+
+
+YEREVAN TRAFFIC & MOBILITY DATA REPORT | Research cut-off: 24 Nov 2026                                                 Page 1
+ 1. Executive summary
+ Yerevan has a growing registered vehicle fleet, a restructured public transport network and several documented congestion
+ corridors. However, publicly accessible sources do not provide a complete, continuously updated dataset of traffic volume
+ (vehicles/hour), speed by street segment and time of day, or the number of vehicles physically circulating in the city at a
+ given moment.
+
+ The most defensible approach for a realistic visualization is to combine: (1) official fleet and public-transport inventory data;
+ (2) reported speed indicators; (3) documented congestion events and corridors; and (4) clearly labelled estimates for any
+ missing segment-level values.
+
+ Key facts
+  Indicator                        Best available public figure                        Date / interpretation
+
+  Registered vehicles in Yerevan   343,220                                             1 September 2025; registered vehicles, not daily
+                                                                                       active traffic
+
+  Passenger-vehicle share          About 88%                                           Of Yerevan's registered vehicles, reported in a 2026
+                                                                                       academic article using 1 Sep 2025 data
+
+  Reported average car speed       25 km/h, declining to 23.5 km/h                     Mayor's statement on 29 June 2026, citing 2025
+                                                                                       Traffic Management Center data
+
+  Reported peak-hour speed         As low as 10 km/h                                   Same mayoral statement; published methodology
+                                                                                       and street-level breakdown not found
+
+  Public transport fleet / route   64 bus routes / 752 stock; 11 minibus routes / 94   Municipal Transport Department page; stock is not
+  inventory                        stock; 10 trolleybus routes / 60 stock              the same as simultaneous vehicles on the road
+
+  Weekday bus operation            632 buses                                           Municipal page; 502 on weekends/holidays
+
+  Bus-lane corridor                Mashtots – Khorenatsi – Beirut – Italy – Argishti   Municipality announcement, 7 July 2025; corridor
+                                                                                       described as continuous
+
+
+ Interpretation: 343,220 is a vehicle-registration count. It must not be visualized as 343,220 cars
+ simultaneously driving on Yerevan roads. Likewise, 752 is the municipal bus fleet/rolling-stock figure, while
+ 632 is the weekday operating count.
+
+
+
+
+YEREVAN TRAFFIC & MOBILITY DATA REPORT | Research cut-off: 24 Nov 2026                                                                    Page 2
+ 2. Vehicle fleet and public transport
+ 2.1 Registered vehicle stock
+ The municipality reported 343,220 registered vehicles in Yerevan as of 1 September 2025, up by 11,906 from the previous
+ year. The national total was 953,965. A later urban-monitoring review repeats the 343,220 figure, but its underlying dated
+ reference is still September 2025. Use the dated official figure rather than treating it as a verified November 2026 register
+ update.
+
+ An academic article published in 2026 reports that approximately 88% of Yerevan's registered vehicles were light passenger
+ vehicles, based on the 1 September 2025 fleet. This supports a passenger-car-dominant model, but does not give the exact
+ number of cars active at peak hour.
+
+ 2.2 Public transport inventory
+  Mode                  Routes         Fleet / rolling stock          Operational detail
+
+  City buses            64             752 units                      632 operating on weekdays; 502 on weekends and holidays
+
+  Minibuses             11             94 units                       81 operating on weekdays; 61 on non-working days
+
+  Trolleybuses          10             60 units                       Municipal inventory figure
+
+  Metro                 10 stations    Not included in road vehicle   Metro is grade-separated and should not be modelled as road traffic
+                                       totals
+
+ The municipal page also records fleet acquisitions during 2020–2024: 100 small GAZelle City buses, 562 Zhong Tong
+ medium buses and 87 MAN large buses. Fifteen Yutong and fifteen Zhong Tong trolleybuses were acquired during
+ 2022–2024. The published total of 752 buses is a stock/inventory figure; the weekday operational figure of 632 is the better
+ input for a road-traffic visualization.
+
+ 2.3 Passenger activity
+ An SDG Spotlight Report for Armenia gives annual Yerevan public-transport passenger totals for 2022: buses 74.1 million;
+ minibuses 44.2 million; trolleybuses 4.3975 million; metro 23.317 million; total 146.0165 million. These are annual
+ passenger trips/validations, not unique people and not vehicles. A later 2026 monitoring page reports 3.6 million
+ public-transport fare validations in the first week of September 2026; treat that as a short-period validation count, not a daily
+ average.
+
+
+
+
+YEREVAN TRAFFIC & MOBILITY DATA REPORT | Research cut-off: 24 Nov 2026                                                                  Page 3
+ 3. Speed and congestion indicators
+ 3.1 Car speeds
+  Metric                             Figure                         Source status / limitation
+
+  Average car speed                  25 km/h, then 23.5 km/h        Reported by Yerevan Mayor on 29 Jun 2026, citing 2025 Traffic
+                                                                    Management Center data; no public raw dataset or methodology located
+
+  Peak-hour car speed                Down to 10 km/h                Same statement; should be treated as a reported peak-period indicator,
+                                                                    not a universal speed for every street
+
+  Mayor's central-area estimate      10–20 km/h at rush hour        Reported by Yerevan for People; measurement method not published
+
+
+ 3.2 Public transport speeds
+ A December 2024 municipal/ADB program progress document reports 2023 average peak-hour speeds on primary
+ thoroughfares: bus 20.6 km/h, minibus 20.8 km/h and trolleybus 14.8 km/h. A 2017 Green City Action Plan gives a similar
+ historical baseline: bus 20.2, minibus 20.8 and trolleybus 14.8 km/h. These are historical citywide/primary-corridor
+ indicators, not current speeds for every bus route.
+
+  Mode                                 Peak-hour average speed                          Data year
+
+  Bus                                  20.6 km/h                                        2023
+
+  Minibus                              20.8 km/h                                        2023
+
+  Trolleybus                           14.8 km/h                                        2023
+
+
+ 3.3 Time-of-day pattern
+ An Armenian government decision text describes the most intensive city traffic as concentrating in morning and evening
+ peak periods, each typically lasting about 1.5–2 hours. It does not provide a validated citywide hourly profile. A documented
+ severe event occurred between 08:00 and 08:30 on 22 April 2026. For a simulation, 07:30–09:30 and 17:00–19:00 are
+ reasonable initial peak windows, but the evening window should be labelled as a modelling assumption until measured
+ locally.
+
+ Suggested time slices for the animation
+  Time slice                 Use in model                                                      Confidence
+
+  06:00–07:30                Early build-up / moderate flow                                    Indicative assumption
+
+  07:30–09:30                Morning peak; strongest congestion on reported corridors          Peak period supported; exact minute-by-minute
+                                                                                               profile unavailable
+
+  09:30–16:30                Inter-peak / variable flow                                        Indicative assumption
+
+  16:30–19:00                Evening peak                                                      Indicative assumption based on general
+                                                                                               peak-period pattern
+
+  19:00–22:00                Evening decline                                                   Indicative assumption
+
+  22:00–06:00                Low-flow baseline                                                 Indicative assumption
+
+
+
+
+YEREVAN TRAFFIC & MOBILITY DATA REPORT | Research cut-off: 24 Nov 2026                                                                   Page 4
+ 4. Congestion corridors and bottlenecks
+ The following roads are grounded in published reports of congestion or documented network constraints. Their inclusion
+ does not mean that every segment is congested every day. For a realistic map, apply congestion by segment and time slice
+ rather than colouring an entire avenue permanently red.
+
+  Road / corridor                Evidence                                             Recommended visualization treatment
+
+  Isakov Avenue                  Near-gridlock reported on 22 Apr 2026, 08:00–08:30   Very high congestion for that event/time; do not
+                                                                                      generalize to all days
+
+  Sebastia Street                Heavy congestion reported in the same event          High congestion during the documented morning event
+
+  Leningradyan Street            Heavy congestion reported in the same event          High congestion during the documented morning event
+
+  Tsitsernakaberd Highway        Heavy congestion reported in the same event          High congestion during the documented morning event
+
+  Orbeli Street                  Heavy congestion reported in the same event          High congestion during the documented morning event
+
+  Baghramyan Avenue              Heavy congestion reported in the same event          High congestion during the documented morning event
+
+  Mashtots Avenue – Khorenatsi   Continuous dedicated public-transport corridor       Show bus/trolleybus priority lane separately from
+  – Beirut – Italy – Argishti    announced 7 Jul 2025                                 general traffic
+
+  Hrazdan River bridge           ADB environmental assessment identifies limited      Model bridge approaches and merge points as potential
+  approaches                     bridges over the Hrazdan as bottlenecks              capacity constraints
+
+
+ Network structure matters
+ The 2020 ADB Initial Environmental Examination notes that the limited number of bridges over the Hrazdan River creates
+ bottlenecks and substantial peak-hour congestion. It also refers to illegal/double parking and weak enforcement as
+ constraints on mobility. This is useful for modelling bridge approaches, junction queues, curbside friction and lane blockage,
+ but it is a historical assessment rather than a current traffic count.
+
+ The same assessment states that, in 2009, traffic exceeded design capacity on more than 20% of the road network, while a
+ further 35% was approaching its limit. These figures are old and must not be used as a 2026 congestion map; they only
+ indicate that capacity stress was a longstanding structural issue.
+
+ What is not available publicly
+ No reliable open dataset was found giving (a) vehicles/hour for each street segment, (b) average speed by
+ street and hour for a typical weekday, (c) queue length in metres, (d) daily active vehicles versus registered
+ vehicles, or (e) a complete bus-lane GIS layer with current operating hours and direction. Do not fabricate
+ these values.
+
+
+
+
+YEREVAN TRAFFIC & MOBILITY DATA REPORT | Research cut-off: 24 Nov 2026                                                                    Page 5
+ 5. Dedicated public-transport lanes
+ The municipality announced a continuous dedicated public-transport lane in July 2025 running along Mashtots Avenue and
+ continuing through Khorenatsi, Beirut, Italy and Argishti Streets, connecting public transport toward Victory Bridge and in the
+ opposite direction. Traffic arrangements at several intersections were adjusted to accommodate the corridor.
+
+ In October 2024, the municipality also described planned or discussed extensions from Kentron toward Arshakunyats
+ Avenue, Garegin Nzhdeh Street and Bagratunyats Street, plus a possible connection linking Nor Nork, Arabkir and
+ Malatia-Sebastia. These were plans/discussions at the time of the announcement, not proof that all such lanes were
+ subsequently implemented.
+
+  Corridor                                  Status evidenced by source                                How to represent
+
+  Mashtots – Khorenatsi – Beirut – Italy    Continuous lane announced as implemented, 7 Jul           Dedicated bus lane; show direction and exact
+  – Argishti                                2025                                                      curb/median placement only after checking
+                                                                                                      current street signs/markings
+
+  Kentron – Arshakunyats – Garegin          Proposed / under implementation discussion in Oct         Dashed planned corridor, not a confirmed active
+  Nzhdeh – Bagratunyats                     2024                                                      lane
+
+  Nor Nork – Arabkir – Malatia-Sebastia     Option under discussion in Oct 2024                       Planned/possible corridor only
+
+ Do not automatically assume that every public-transport vehicle uses a physically separate lane. A route
+ network and a bus-lane network are different layers. A lane may also have direction-specific restrictions,
+ operating hours, turn restrictions and enforcement rules that need field verification.
+
+
+ 6. Recommended modelling specification
+ Use the following hierarchy so the final visualization remains credible:
+
+  Layer                      Recommended fields                                          Source / confidence
+
+  Road geometry              Street name, segment ID, direction, lane count, junction    GIS / OpenStreetMap geometry; verify local changes
+                             nodes
+
+  General traffic            Vehicle count per 15 min, mean speed, occupancy,            Not found as a public citywide dataset; use measured or
+                             queue length                                                clearly labelled estimated values
+
+  Vehicle classes            Passenger car, taxi, delivery van, truck, bus, minibus      Class split should be measured or declared as an
+                                                                                         assumption
+
+  Public transport           Route ID, vehicle type, active fleet, direction, headway,   Municipal route/fleet inventory; live position feed not publicly
+                             stop locations                                              verified
+
+  Bus priority               Lane geometry, direction, operating hours, permitted        Municipal announcements plus field verification
+                             vehicles
+
+  Time                       Timestamp, weekday/weekend, school term, weather,           Use separate scenarios; do not mix event-day data with a
+                             incident/roadworks                                          normal weekday
+
+  Congestion state           Speed band, volume/capacity ratio, queue length             Use a consistent rule; do not label inferred values as official
+
+
+ Practical speed bands for visual encoding (proposed model thresholds, not official
+ Yerevan categories):
+  Colour / state                       Suggested speed                        Meaning
+
+  Free flow                            Above 30 km/h                          Relatively unconstrained movement
+
+  Slow                                 20–30 km/h                             Reduced speed / moderate friction
+
+  Heavy                                10–20 km/h                             Significant delay; queues likely
+
+  Severe                               Below 10 km/h                          Near standstill / stop-and-go
+
+  Bus-priority lane                    Separate layer                         Do not infer that buses always travel at a fixed speed
+
+
+
+
+YEREVAN TRAFFIC & MOBILITY DATA REPORT | Research cut-off: 24 Nov 2026                                                                             Page 6
+ For bus animation, use actual route geometry and stop dwell times. Do not set buses to a constant 20.6 km/h: that figure is
+ a 2023 peak-hour average across primary thoroughfares. A route-level model should include acceleration, stopping,
+ passenger boarding, intersection delay and any dedicated-lane advantage.
+
+
+
+
+YEREVAN TRAFFIC & MOBILITY DATA REPORT | Research cut-off: 24 Nov 2026                                                  Page 7
+ 7. Data gaps and how to close them
+ To upgrade this report from a defensible reference model to a high-accuracy traffic simulation, the following data should be
+ requested or measured:
+
+  Required dataset                      Why it matters                                     Best source / method
+
+  15-minute traffic counts by           Calculates actual vehicle flow and peak profiles   Yerevan Traffic Management Center; video
+  direction and segment                                                                    analytics / loop detectors
+
+  Floating-car speed traces by street   Creates realistic speed heatmaps                   Yandex / Google traffic history, fleet GPS, probe
+  and time                                                                                 data
+
+  Bus GPS positions and trip logs       Separates bus movement from car movement           Yerevan Bus / municipal transport systems
+
+  Bus-lane GIS and enforcement          Prevents incorrect lane rendering                  Municipality; field survey and street-level
+  schedule                                                                                 imagery
+
+  Signal timings and junction turning   Models queues and spillback                        Traffic Management Center / field observation
+  counts
+
+  Roadworks, incidents and event        Explains exceptional congestion                    Municipal notices, police and event organizers
+  calendar
+
+  Vehicle class counts                  Separates cars, taxis, trucks and buses            Classified video counts
+
+
+ Suggested request to the municipality
+ Request anonymized, aggregated traffic data for a typical weekday and weekend, in 15-minute intervals, by road segment
+ and direction, including vehicle counts, average speed, occupancy, queue length, vehicle class, bus GPS travel times,
+ traffic-signal plans and the current GIS layer of dedicated public-transport lanes. Ask for the date range, sensor coverage,
+ measurement method and missing-data rate.
+
+ Quality-control rules
+ 1. Keep every observation tied to a timestamp and direction.
+ 2. Keep registered fleet counts separate from active traffic counts.
+ 3. Keep bus fleet size separate from buses operating simultaneously.
+ 4. Mark incident-day congestion separately from a typical weekday.
+ 5. Record the source and confidence for every number.
+ 6. Never interpolate across missing streets without labelling the result as estimated.
+
+
+ 8. Source register
+ The following sources were used. Dates and limitations are retained so the report can be audited and updated.
+ [S1] Yerevan Municipality – Transport Department. Route network, fleet inventory and weekday operating counts. Open source
+
+ [S2] Yerevan Municipality – Yerevan Traffic Management Center. Establishment, remit and 2026 development priorities. Open source
+
+ [S3] Yerevan Municipality – Traffic management changes, 7 July 2025. Dedicated corridor along Mashtots, Khorenatsi, Beirut, Italy and Argishti.
+ Open source
+
+ [S4] Yerevan Municipality – Recent changes in traffic management, 11 September 2025. Reported reductions in traffic delays: 13.3% during
+ peak-hour slowdowns and 25.7% during average slowdowns; the public page does not provide the raw dataset. Open source
+
+ [S5] ArmInfo, 29 June 2026. Mayor's statement on average car speed (25 km/h, falling to 23.5 km/h) and peak-hour speed (10 km/h), citing 2025
+ Traffic Management Center data. Open source
+
+ [S6] Yerevan for People – Traffic & car dominance, facts checked 14 October 2026. Registered fleet, caveats on citywide speed data and reported
+ central rush-hour speed estimate. Open source
+
+ [S7] Panorama.am, 22 April 2026. Reported morning gridlock, 08:00–08:30, and named corridors. Open source
+
+ [S8] ADB / Yerevan Municipality – Initial Environmental Examination, Yerevan Bus Depot Project, 2020. Hrazdan bridge bottlenecks, historic
+ capacity stress and road-network constraints. Open PDF
+
+ [S9] Yerevan Green City Action Plan, 2017. Historical public-transport peak-hour speeds and transport-management baseline. Open PDF
+
+ [S10] ARM: Sustainable Urban Development Investment Program, Tranche 2, December 2024. 2023 peak-hour public-transport speeds and
+ ridership history. Open PDF
+
+ [S11] SDG Spotlight Report, Armenia 2023. Annual public-transport ridership by mode for 2014, 2021 and 2022. Open PDF
+
+ [S12] Yerevan for People – Armenian-language traffic dossier. Underlying fleet-count chronology and limitations. Open source
+
+
+
+
+YEREVAN TRAFFIC & MOBILITY DATA REPORT | Research cut-off: 24 Nov 2026                                                                           Page 8
+

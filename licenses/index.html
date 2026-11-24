@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Տաքսու լիցենզիաներ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: calm official registry, clinical and trustworthy
+   IDEA: a city licensing office counter — register card on one side, check stamp on the other
+   PICTURE: the live license card with its QR code is the picture
+   COLOUR and TYPE: deep municipal blue field, white paper, green valid / red revoked stamps; Noto Sans Armenian
+   LAYOUT: top bar with role, then form + card side by side, registry table under; patrol gets one big lookup */
+:root{color-scheme:light dark;--bg:light-dark(#f3f9ff,#0c1724);--paper:light-dark(#ffffff,#13243a);--ink:light-dark(#0e3355,#e6f1fc);--mut:light-dark(#557391,#9bb6d1);--line:light-dark(#cfe3f6,#24405f);--sky:light-dark(#dff0ff,#173250);--blue:#2a7fd0;--blue2:light-dark(#2a7fd0,#5aa6ef);--ok:#2e7d4f;--bad:#b23a48;--warn:#b7791f}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Noto Sans Armenian",system-ui,sans-serif;overflow-x:clip}
+h1,h2{margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(22px,3vw,30px);font-weight:800}
+h2{font-size:20px;font-weight:700;margin-bottom:14px}
+.top{background:linear-gradient(180deg,var(--sky),var(--paper));color:var(--ink);border-bottom:1px solid var(--line);padding:16px max(5vw,16px);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.top small{display:block;color:var(--mut);font-size:14px}
+body::before{content:"";position:fixed;inset:auto 0 0 0;height:46vh;z-index:-1;pointer-events:none;opacity:.55;background:no-repeat center bottom/100% 100% url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1200 400%27 preserveAspectRatio=%27none%27%3E%3Cpath d=%27M0 400 L0 330 C120 320 220 300 330 250 L520 120 C560 95 590 95 630 120 L760 200 C800 180 830 175 870 200 L1050 300 C1110 330 1160 335 1200 335 L1200 400Z%27 fill=%27%23cfe6fb%27/%3E%3Cpath d=%27M520 120 C560 95 590 95 630 120 L600 140 L575 128 L550 142Z%27 fill=%27%23ffffff%27/%3E%3Cpath d=%27M760 200 C800 180 830 175 870 200 L845 210 L815 200 L790 212Z%27 fill=%27%23ffffff%27/%3E%3C/svg%3E")}
+:root[data-theme=dark] body::before{opacity:.12}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) body::before{opacity:.12}}
+.card{box-shadow:0 8px 30px -18px rgba(42,127,208,.45)}
+.band{padding:clamp(20px,3vw,40px) max(5vw,16px);max-width:1240px;margin:0 auto}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(16px,2.4vw,28px)}
+.grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:20px;align-items:start}
+@media(max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+label{display:block;font-size:14px;font-weight:500;color:var(--mut);margin:12px 0 4px}
+input,select,textarea{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);min-height:44px}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid #4f8ac4;outline-offset:1px}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 14px}
+@media(max-width:520px){.row2{grid-template-columns:minmax(0,1fr)}}
+button{font:inherit;font-weight:700;font-size:15px;min-height:44px;padding:10px 18px;border-radius:9px;border:0;cursor:pointer;background:var(--blue2);color:#fff}
+button.ghost{background:transparent;color:inherit;border:1px solid currentColor}
+button.red{background:var(--bad)}button.green{background:var(--ok)}
+button:disabled{opacity:.5;cursor:default}
+.err{color:var(--bad);font-size:14px;min-height:20px;margin-top:8px}
+.lic{border:2px solid var(--blue2);border-radius:14px;padding:20px;background:linear-gradient(160deg,var(--sky),var(--paper) 55%);position:relative}
+.lic .num{font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:.02em}
+.lic dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:14px 0 0}
+.lic dt{color:var(--mut);font-size:14px}.lic dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+.qr{background:#fff;padding:8px;border-radius:8px;width:max-content;margin-top:14px}
+.stamp{display:inline-block;font-weight:800;font-size:14px;padding:4px 12px;border-radius:999px;color:#fff;white-space:nowrap}
+.s-ok{background:var(--ok)}.s-bad{background:var(--bad)}.s-warn{background:var(--warn)}
+.empty{color:var(--mut);text-align:center;padding:30px 10px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;font-size:13px;color:var(--mut);font-weight:500;padding:8px;border-bottom:1px solid var(--line)}
+td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+td.n{font-weight:700;white-space:nowrap}td.d{white-space:nowrap}
+.acts{display:flex;gap:6px;flex-wrap:wrap}.acts button{min-height:36px;padding:6px 12px;font-size:13px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:12px}
+.tools input{max-width:320px}
+.note{font-size:13px;color:var(--mut);margin-top:10px}
+.login{max-width:420px;margin:clamp(30px,8vh,90px) auto}
+.big{font-size:20px;min-height:56px;text-transform:uppercase}
+.result{margin-top:18px}
+.result.bad .lic{border-color:var(--bad)}.result.ok .lic{border-color:var(--ok)}
+.hidden{display:none!important}
+.logo{height:52px;width:auto}
+.logo[hidden]{display:none}
+.modal{position:fixed;inset:0;background:rgba(14,51,85,.35);display:grid;place-items:center;padding:16px;z-index:10}
+.modal .card{width:min(520px,100%)}
+textarea{resize:vertical;min-height:96px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips button{background:var(--sky);color:var(--ink);font-weight:500;font-size:13px;min-height:34px;padding:5px 12px;border-radius:999px}
+.why{font-size:13px;color:var(--bad);margin-top:3px}
+.scroll{overflow-x:auto}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;color:var(--mut)}.stack td:empty{display:none}}
+@media print{.top,.noprint{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <!-- ԼՈԳՈՆԵՐ. սեփական դոմենում տեղադրելիս դրեք ձեր պաշտոնական ֆայլերը (օր.՝ logo-left.png, logo-right.png)
+       նույն թղթապանակում և data-src-ը փոխարինեք src-ով։ Առանց ֆայլի տեղը մնում է անտեսանելի։ -->
+  <div style="display:flex;gap:14px;align-items:center">
+  <img class="logo" alt="" data-src="logo-left.png" hidden>
+  <div><h1>Տաքսու լիցենզիաների ռեեստր</h1><small>Ավտոբուսային գծերով երթևեկության թույլտվություն · ԵԵԿ – ՆԳՆ</small></div>
+  <img class="logo" alt="" data-src="logo-right.png" hidden>
+  </div>
+  <div id="who" class="hidden" style="display:flex;gap:10px;align-items:center"><span id="whoName"></span><button class="ghost" id="logout">Ելք</button></div>
+</header>
+
+<!-- LOGIN -->
+<section id="vLogin" class="band">
+  <form class="card login" id="fLogin">
+    <h2>Մուտք համակարգ</h2>
+    <label for="lu">Օգտանուն</label><input id="lu" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" required>
+    <label for="lp">Գաղտնաբառ</label><input id="lp" type="password" autocomplete="current-password" autocapitalize="off" required>
+    <div class="err" id="lErr"></div>
+    <button type="submit" style="width:100%;margin-top:6px">Մուտք</button>
+    <p class="note">ԵԵԿ ադմինիստրատոր՝ լիցենզիաների տրամադրում և չեղարկում։ Պարեկային ծառայություն՝ միայն ստուգում։</p>
+  </form>
+</section>
+
+<!-- ADMIN -->
+<section id="vAdmin" class="band hidden">
+  <div class="grid">
+    <form class="card" id="fNew">
+      <h2>Նոր լիցենզիա</h2>
+      <label for="fDriver">Վարորդի անուն, ազգանուն</label><input id="fDriver" required>
+      <div class="row2">
+        <div><label for="fModel">Մեքենայի մոդել</label><input id="fModel" placeholder="Toyota Prius" required></div>
+        <div><label for="fPlate">Պետհամարանիշ</label><input id="fPlate" placeholder="77XX777" required></div>
+      </div>
+      <label for="fVin">VIN կոդ (17 նիշ)</label><input id="fVin" maxlength="17" required style="text-transform:uppercase">
+      <div class="row2">
+        <div><label for="fFrom">Տրամադրման ամսաթիվ</label><input id="fFrom" type="date" required></div>
+        <div><label for="fTo">Ավարտի ամսաթիվ</label><input id="fTo" type="date" required></div>
+      </div>
+      <div class="err" id="nErr"></div>
+      <button type="submit" id="bIssue" style="width:100%">Տրամադրել լիցենզիա</button>
+      <p class="note">Ժամկետը լռելյայն 2 ամիս է։ Համարը գեներացվում է ավտոմատ։ Ժամկետը լրանալուն պես լիցենզիան չեղարկվում է ավտոմատ։</p>
+    </form>
+    <div>
+      <div id="preview" class="lic"><div class="empty">Տրամադրված լիցենզիան և QR կոդը կհայտնվեն այստեղ</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <div class="tools">
+      <h2 style="margin:0">Ռեեստր <span id="count" style="color:var(--mut);font-weight:500"></span></h2>
+      <input id="q" placeholder="Որոնում՝ համար, համարանիշ, VIN, անուն">
+    </div>
+    <div class="scroll"><table class="stack">
+      <thead><tr><th>Համար</th><th>Վարորդ</th><th>Մոդել</th><th>Համարանիշ</th><th>VIN</th><th>Ժամկետ</th><th>Կարգավիճակ</th><th></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+    <div id="dbNote" class="note"></div>
+  </div>
+</section>
+
+<div id="dlg" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="dlgT">
+  <form class="card" id="fRev">
+    <h2 id="dlgT">Լիցենզիայի չեղարկում</h2>
+    <p id="revWhat" style="margin:0 0 4px"></p>
+    <label for="revReason">Չեղարկման պատճառ (պարտադիր)</label>
+    <textarea id="revReason" rows="4" placeholder="Օրինակ՝ վարորդը դուրս է եկել աշխատանքից"></textarea>
+    <div class="chips" id="chips"><button type="button">Վարորդը դուրս է եկել աշխատանքից</button><button type="button">Տաքսի ծառայության դիմում</button><button type="button">Ավտոբուսային գծի կանոնների խախտում</button><button type="button">QR կոդը կորել կամ վնասվել է</button></div>
+    <div class="err" id="rErr"></div>
+    <div class="acts" style="justify-content:flex-end;margin-top:6px"><button type="button" class="ghost" id="rBack">Հետ</button><button type="submit" class="red" id="rOk">Չեղարկել լիցենզիան</button></div>
+  </form>
+</div>
+
+<!-- PATROL -->
+<section id="vUser" class="band hidden">
+  <form class="card" id="fCheck" style="max-width:640px;margin:0 auto">
+    <h2>Լիցենզիայի ստուգում</h2>
+    <label for="cNum">Լիցենզիայի հերթական համար</label>
+    <input id="cNum" class="big" placeholder="ԵԵԿ-0001" required autocomplete="off">
+    <button type="submit" style="width:100%;margin-top:12px">Ստուգել</button>
+    <div id="cRes" class="result"></div>
+  </form>
+</section>
+
+<script>
+{
+const USERS={admin:{p:["admin"],role:"admin",name:"ԵԵԿ ադմին"},user:{p:["112","user112","user 112"],role:"user",name:"Պարեկային ծառայություն"}};
+/* Կայքի հասցեն, որը գրվում է QR կոդում։ Սեփական դոմենի դեպքում փոխել միայն այս տողը */
+const SITE="https://pclilit115.github.io/yerevantrafic/licenses/";
+const $=id=>document.getElementById(id);
+const hashNum=()=>{const m=String(location.hash||"").match(/^#lic-(\d{1,6})$/i);return m?m[1]:null};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let role=null,db=null,list=[],unsub=null,loaded=false;
+const today=()=>new Date().toISOString().slice(0,10);
+const plus2m=d=>{const x=new Date(d);x.setMonth(x.getMonth()+2);return x.toISOString().slice(0,10)};
+const fmt=d=>d?d.split("-").reverse().join("."):"";
+const norm=s=>String(s||"").toUpperCase().replace(/\s|-/g,"").replace(/^ԵԵԿ/,"");
+function status(l){if(l.status==="revoked")return[l.auto?"Ժամկետը լրացել է":"Չեղարկված","s-bad",false];if(l.to<today())return["Ժամկետանց","s-warn",false];if(l.from>today())return["Դեռ չի գործում","s-warn",false];return["Գործող","s-ok",true]}
+
+/* storage: shared db when available, otherwise this browser */
+const LS="taxi-lic-v1";
+function lsLoad(){try{return JSON.parse(localStorage.getItem(LS)||"[]")}catch(e){return[]}}
+function lsSave(){try{localStorage.setItem(LS,JSON.stringify(list))}catch(e){}}
+async function connect(){
+  try{db=await claude.use("db")}catch(e){db=null}
+  if(!db){list=lsLoad();loaded=true;setTimeout(autoRevoke,0);$("dbNote").textContent="Ընդհանուր տվյալների բազան հասանելի չէ․ տվյալները պահվում են միայն այս բրաուզերում։";render();return}
+  $("dbNote").textContent="Տվյալները պահվում են ընդհանուր բազայում և հասանելի են բոլոր մուտք գործողներին։";
+  const t=setTimeout(()=>{$("dbNote").textContent="Բազան չի պատասխանում․ փորձեք թարմացնել էջը։"},10000);
+  unsub=db.collection("licenses").onSnapshot(s=>{clearTimeout(t);loaded=true;list=s.docs.map(d=>({id:d.id,...d.data()}));render();autoRevoke();if(pendingHash&&role==="admin"){pendingHash=false;openFromHash()}if(role==="user"&&$("cNum").value)check()},e=>{clearTimeout(t);$("dbNote").textContent="Բազայի սխալ․ "+(e&&e.message||"")})
+}
+async function save(l){
+  if(db){await db.collection("licenses").doc(l.id).set(l)}
+  else{const i=list.findIndex(x=>x.id===l.id);i<0?list.push(l):list[i]=l;lsSave();render()}
+}
+
+/* login */
+function enter(r){
+  role=r;try{sessionStorage.setItem("role",r)}catch(e){}
+  $("vLogin").classList.add("hidden");$("who").classList.remove("hidden");
+  $("whoName").textContent=r==="admin"?USERS.admin.name:USERS.user.name;
+  $(r==="admin"?"vAdmin":"vUser").classList.remove("hidden");
+  if(r==="admin"){$("fFrom").value=today();$("fTo").value=plus2m(today())}
+  render();openFromHash();autoRevoke();
+}
+function openFromHash(){const n=hashNum();if(!n||!role)return;const num="ԵԵԿ-"+n.padStart(4,"0");
+  if(role==="user"){$("cNum").value=num;check()}
+  else{const l=list.find(x=>x.seq===+n);if(l)show(l);else pendingHash=true}}
+let pendingHash=false;
+window.addEventListener("hashchange",openFromHash);
+$("fLogin").addEventListener("submit",e=>{e.preventDefault();const u=USERS[$("lu").value.trim().toLowerCase()];
+  if(!u||!u.p.includes($("lp").value.trim().toLowerCase())){$("lErr").textContent="Սխալ օգտանուն կամ գաղտնաբառ";return}
+  $("lErr").textContent="";$("lp").value="";enter(u.role)});
+$("logout").addEventListener("click",()=>{try{sessionStorage.removeItem("role")}catch(e){}role=null;
+  ["vAdmin","vUser","who"].forEach(i=>$(i).classList.add("hidden"));$("vLogin").classList.remove("hidden");$("cRes").innerHTML="";$("cNum").value=""});
+
+/* license card */
+function card(l,withQr){
+  const[st,cls]=status(l);
+  return `<div class="lic"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+   <div><div style="font-size:13px;color:var(--mut)">Լիցենզիա №</div><div class="num">${esc(l.num)}</div></div><span class="stamp ${cls}">${st}</span></div>
+   <dl><dt>Վարորդ</dt><dd>${esc(l.driver)}</dd><dt>Մոդել</dt><dd>${esc(l.model)}</dd><dt>Պետհամարանիշ</dt><dd>${esc(l.plate)}</dd>
+   <dt>VIN</dt><dd>${esc(l.vin)}</dd><dt>Ժամկետ</dt><dd>${esc(fmt(l.from))} – ${esc(fmt(l.to))}</dd>
+   ${l.status==="revoked"?`<dt>Չեղարկվել է</dt><dd>${esc(fmt(l.revokedAt))}${l.auto?" (ավտոմատ)":""}</dd><dt>Պատճառ</dt><dd style="color:var(--bad)">${esc(l.revokeReason||"—")}</dd>`:""}</dl>
+   ${withQr?`<div class="qr" id="qr"></div><div class="note">QR կոդը փակցվում է մեքենայի վրա․ սկանավորելիս բացվում է այս կայքը՝ լիցենզիայի տվյալներով</div>`:""}</div>`
+}
+function drawQr(l){const el=$("qr");if(!el)return;
+  const txt=`${SITE}#lic-${String(l.seq||0).padStart(4,"0")}`;
+  try{if(typeof qrcode==="function"){const q=qrcode(0,"M");q.addData(txt);q.make();el.innerHTML=q.createSvgTag({cellSize:4,margin:2,scalable:true});const sv=el.querySelector("svg");if(sv){sv.style.width="160px";sv.style.height="160px";sv.style.display="block"}return}}catch(e){}
+  try{if(typeof QRCode==="function"){el.innerHTML="";new QRCode(el,{text:txt,width:160,height:160,correctLevel:QRCode.CorrectLevel.M});return}}catch(e){}
+  el.style.background="none";el.innerHTML='<span class="err">QR կոդը չստեղծվեց․ թարմացրեք էջը</span>'}
+function show(l){$("preview").outerHTML=`<div id="preview">${card(l,true)}<div class="acts noprint" style="margin-top:10px"><button class="ghost" id="pClose">Փակել</button></div></div>`;drawQr(l);$("pClose").onclick=()=>{$("preview").outerHTML=`<div id="preview" class="lic"><div class="empty">Տրամադրված լիցենզիան և QR կոդը կհայտնվեն այստեղ</div></div>`}}
+
+/* admin: issue */
+$("fFrom").addEventListener("change",()=>{$("fTo").value=plus2m($("fFrom").value)});
+$("fNew").addEventListener("submit",async e=>{e.preventDefault();if(role!=="admin")return;
+  const vin=$("fVin").value.trim().toUpperCase(),plate=$("fPlate").value.trim().toUpperCase().replace(/\s/g,"");
+  if(!/^[A-HJ-NPR-Z0-9]{17}$/.test(vin)){$("nErr").textContent="VIN-ը պետք է լինի 17 նիշ (լատինատառ և թվեր, առանց I, O, Q)";return}
+  if($("fTo").value<=$("fFrom").value){$("nErr").textContent="Ավարտի ամսաթիվը պետք է լինի տրամադրումից հետո";return}
+  const dup=list.find(x=>status(x)[2]&&(x.plate===plate||x.vin===vin));
+  if(dup){$("nErr").textContent=`Այս մեքենան արդեն ունի գործող լիցենզիա՝ ${dup.num}`;return}
+  const seq=list.reduce((m,x)=>Math.max(m,x.seq||0),0)+1;
+  const l={id:"L"+String(seq).padStart(4,"0")+"-"+Date.now().toString(36),seq,num:"ԵԵԿ-"+String(seq).padStart(4,"0"),
+    driver:$("fDriver").value.trim(),model:$("fModel").value.trim(),plate,vin,from:$("fFrom").value,to:$("fTo").value,
+    status:"active",createdAt:new Date().toISOString()};
+  $("bIssue").disabled=true;$("nErr").textContent="";
+  try{await save(l);show(l);["fDriver","fModel","fPlate","fVin"].forEach(i=>$(i).value="");$("fFrom").value=today();$("fTo").value=plus2m(today())}
+  catch(err){$("nErr").textContent="Չհաջողվեց պահպանել․ "+(err&&err.message||"")}
+  $("bIssue").disabled=false});
+
+/* admin: table */
+function render(){
+  if(role!=="admin")return;
+  const q=norm($("q").value);
+  const rows=list.slice().sort((a,b)=>(b.seq||0)-(a.seq||0)).filter(l=>!q||[l.num,l.plate,l.vin,l.driver].some(v=>norm(v).includes(q)));
+  $("count").textContent=`· ${list.length}`;
+  $("rows").innerHTML=rows.length?rows.map(l=>{const[st,cls]=status(l);return `<tr>
+   <td class="n">${esc(l.num)}</td><td>${esc(l.driver)}</td><td>${esc(l.model)}</td><td class="d">${esc(l.plate)}</td><td style="font-size:13px">${esc(l.vin)}</td>
+   <td class="d">${esc(fmt(l.from))} – ${esc(fmt(l.to))}</td><td><span class="stamp ${cls}">${st}</span>${l.status==="revoked"&&l.revokeReason?`<div class="why">${esc(l.revokeReason)}</div>`:""}</td>
+   <td><div class="acts"><button class="ghost" data-a="view" data-id="${esc(l.id)}">Դիտել</button>${l.status==="revoked"
+     ?`<button class="green" data-a="restore" data-id="${esc(l.id)}">Վերականգնել</button>`
+     :`<button class="red" data-a="revoke" data-id="${esc(l.id)}">Հանել</button>`}</div></td></tr>`}).join("")
+   :`<tr><td colspan="8" class="empty">${list.length?"Ոչինչ չի գտնվել":"Դեռ լիցենզիաներ չկան․ տրամադրեք առաջինը վերևի ձևով"}</td></tr>`;
+}
+$("q").addEventListener("input",render);
+let revId=null;
+function openRev(l){revId=l.id;$("revWhat").textContent=`${l.num} · ${l.plate} · ${l.driver}`;$("revReason").value="";$("rErr").textContent="";$("dlg").classList.remove("hidden");$("revReason").focus()}
+function closeRev(){revId=null;$("dlg").classList.add("hidden")}
+$("rBack").addEventListener("click",closeRev);
+$("dlg").addEventListener("click",e=>{if(e.target===$("dlg"))closeRev()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&revId)closeRev()});
+$("chips").addEventListener("click",e=>{const b=e.target.closest("button");if(b){$("revReason").value=b.textContent;$("revReason").focus()}});
+$("fRev").addEventListener("submit",async e=>{e.preventDefault();if(role!=="admin")return;
+  const why=$("revReason").value.trim();if(why.length<3){$("rErr").textContent="Գրեք չեղարկման պատճառը";return}
+  const l=list.find(x=>x.id===revId);if(!l){closeRev();return}
+  $("rOk").disabled=true;
+  try{await save({...l,status:"revoked",revokedAt:today(),revokeReason:why,auto:false});closeRev()}
+  catch(err){$("rErr").textContent="Չհաջողվեց պահպանել․ "+(err&&err.message||"")}
+  $("rOk").disabled=false});
+$("rows").addEventListener("click",async e=>{const b=e.target.closest("button");if(!b||role!=="admin")return;
+  const l=list.find(x=>x.id===b.dataset.id);if(!l)return;
+  if(b.dataset.a==="view"){show(l);$("preview").scrollIntoView({behavior:"smooth",block:"center"});return}
+  if(b.dataset.a==="revoke"){openRev(l);return}
+  b.disabled=true;
+  const n={...l,status:"active",revokedAt:null,revokeReason:null,auto:false};
+  if(n.to<today()){n.from=today();n.to=plus2m(today())}
+  try{await save(n)}catch(err){$("dbNote").textContent="Չհաջողվեց պահպանել․ "+(err&&err.message||"");render()}});
+
+/* auto-revoke expired licenses (runs while the admin has the page open) */
+const autoBusy=new Set();
+async function autoRevoke(){if(role!=="admin"||!loaded)return;const t=today();
+  for(const l of list){if(l.status!=="revoked"&&l.to<t&&!autoBusy.has(l.id)){autoBusy.add(l.id);
+    try{await save({...l,status:"revoked",revokedAt:t,revokeReason:"Ավտոմատ չեղարկում՝ գործողության ժամկետը լրացել է",auto:true})}catch(e){}autoBusy.delete(l.id)}}}
+setInterval(autoRevoke,60*60*1000);
+
+/* patrol: check */
+function check(){
+  if(!loaded){$("cRes").className="result";$("cRes").innerHTML=`<p class="note">Տվյալները բեռնվում են…</p>`;return}
+  const raw=$("cNum").value.trim();const um=raw.match(/lic-(\d+)/i);const q=um?um[1].replace(/^0+/,""):norm(raw.split("|")[0]).replace(/^EEK/,"").replace(/^0+/,"");
+  const l=list.find(x=>norm(x.num).replace(/^0+/,"")===q);
+  if(!l){$("cRes").className="result bad";$("cRes").innerHTML=`<div class="lic"><span class="stamp s-bad">Չի գտնվել</span><p style="margin:10px 0 0">«${esc(raw)}» համարով լիցենզիա ռեեստրում չկա։ Լիցենզիան համարվում է չգործող։</p></div>`;return}
+  const[,,ok]=status(l);$("cRes").className="result "+(ok?"ok":"bad");
+  $("cRes").innerHTML=card(l,false)+`<p class="note">${ok?"Երթևեկությունն ավտոբուսային գծով թույլատրելի է։":"Լիցենզիան չի գործում․ կիրառվում է տուգանք։"} Համեմատեք պետհամարանիշը և VIN-ը մեքենայի տվյալների հետ։</p>`;
+}
+$("fCheck").addEventListener("submit",e=>{e.preventDefault();check()});
+
+if(hashNum())$("lErr").outerHTML=`<div class="err" id="lErr"></div><p class="note" style="margin:0">QR կոդ՝ լիցենզիա ԵԵԿ-${esc(hashNum().padStart(4,"0"))}։ Մուտքից հետո տվյալները կբացվեն անմիջապես։</p>`;
+try{const r=sessionStorage.getItem("role");if(r==="admin"||r==="user")enter(r)}catch(e){}
+connect();
+}
+</script>
+</body>
+</html>

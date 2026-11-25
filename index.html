@@ -2,7 +2,7 @@
 <html lang="hy">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <title>Երևան 3D երթևեկություն</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -75,14 +75,46 @@ th{color:var(--mute);font-weight:600}
 #load .bar{width:240px;height:4px;background:#222;border-radius:2px;margin:12px auto 0;overflow:hidden}
 #load .bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
 #hint{position:fixed;right:12px;bottom:12px;z-index:5;font-size:11.5px;color:var(--mute);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 10px}
+
+#mbar,#fab,#mtoast,#grab{display:none}
 @media (max-width:760px){
- #panel{left:0;right:0;top:auto;bottom:0;width:auto;max-height:52vh;border-radius:14px 14px 0 0}
- #panel.min{bottom:0}
- #stats{left:8px;right:8px;width:auto;top:8px;padding:8px 10px}
- #stats .k,#spark{display:none}
+ html,body{overscroll-behavior:none;font-size:15px}
+ #panel{left:0;right:0;top:auto;bottom:0;width:auto;height:var(--ph,96px);max-height:none;border-radius:18px 18px 0 0;border-bottom:0;transition:height .22s ease;padding-bottom:env(safe-area-inset-bottom)}
+ #panel.drag{transition:none}
+ #panel .head{display:none}
+ #grab{display:flex;justify-content:center;align-items:center;height:22px;touch-action:none;cursor:grab;flex:none}
+ #grab i{width:44px;height:5px;border-radius:3px;background:#ffffff55}
+ .tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:0;padding:0 4px;overflow:visible;flex:none}
+ .tabs button{display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 0 8px;font-size:11px;min-height:56px;justify-content:center}
+ .tabs button::before{content:attr(data-i);font-size:20px;line-height:1.1}
+ .body{padding:12px 16px 24px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+ .btn{min-height:44px;font-size:14px;padding:9px 12px}
+ .tg{padding:10px 0;font-size:14px}.tg input{width:22px;height:22px}
+ .note{font-size:13px}
+ input[type=range]{height:36px}
+ h3{font-size:13.5px}
+ #mbar{display:flex;position:fixed;left:8px;right:8px;top:calc(8px + env(safe-area-inset-top));z-index:7;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:6px 8px;backdrop-filter:blur(10px)}
+ #mbar .mb{min-width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:#1d232d;color:var(--ink);font:600 15px "Noto Sans Armenian",sans-serif;display:grid;place-items:center;padding:0 8px}
+ #mbar .mb.on{background:var(--acc);color:#1a1400;border-color:var(--acc)}
+ #mbar .mt{flex:1;line-height:1.15;overflow:hidden}
+ #mbar .mt b{font-size:19px;font-family:"JetBrains Mono",monospace;font-weight:500}
+ #mbar .mt span{display:block;font-size:11.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #stats{display:none;left:8px;right:8px;width:auto;top:calc(70px + env(safe-area-inset-top));max-height:58vh;overflow:auto;padding:10px 12px;z-index:7}
+ body.showstats #stats{display:block}
+ #stats .k{display:grid}#spark{display:none}
  #hint{display:none}
- #pairbar{bottom:auto;top:66px}
+ #pairbar{bottom:auto;top:calc(70px + env(safe-area-inset-top));left:8px;right:8px;transform:none;justify-content:space-between;gap:8px;font-size:12.5px;flex-wrap:wrap}
+ body.showstats #pairbar{display:none!important}
+ #fab{display:flex;flex-direction:column;gap:10px;position:fixed;right:12px;bottom:calc(var(--ph,96px) + 14px);z-index:6;transition:bottom .22s ease}
+ #fab button{width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:22px;backdrop-filter:blur(10px);box-shadow:0 4px 14px #0007}
+ #fab button.pri{background:var(--bus);border-color:var(--bus);color:#fff}
+ #mtoast{position:fixed;left:8px;right:8px;top:calc(70px + env(safe-area-inset-top));z-index:8;background:#c62f2f;color:#fff;border-radius:14px;padding:10px 12px;font-size:14px;align-items:center;gap:10px;box-shadow:0 4px 14px #0008}
+ #mtoast.on{display:flex}
+ #mtoast span{flex:1}
+ #mtoast button{min-width:44px;height:40px;border-radius:10px;border:0;background:#ffffff30;color:#fff;font-size:16px}
+ #tip{left:8px!important;right:8px;top:auto!important;bottom:calc(var(--ph,96px) + 14px);max-width:none;pointer-events:auto;font-size:14px;padding:10px 12px;margin-right:74px}
 }
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -91,17 +123,18 @@ th{color:var(--mute);font-weight:600}
 <div id="load"><div>Բեռնում եմ Երևանի քարտեզը…<div class="bar"><i id="lb"></i></div><div class="note" id="lt"></div></div></div>
 
 <aside id="panel">
+ <div id="grab" aria-label="Բացել/փակել վահանակը" role="button"><i></i></div>
  <div class="head">
   <h1>Երևան · 3D երթևեկություն<small>Երևանի 12 վարչական շրջան</small></h1>
   <button class="ib" id="minb" aria-label="Ծալել վահանակը">–</button>
  </div>
  <nav class="tabs" id="tabs">
-  <button data-t="time" class="on">Ժամ</button>
-  <button data-t="flow">Հոսք</button>
-  <button data-t="bus">Գծեր</button>
-  <button data-t="pair">A → B</button>
-  <button data-t="view">Տեսք</button>
-  <button data-t="data">Տվյալներ</button>
+  <button data-i="🕐" data-t="time" class="on">Ժամ</button>
+  <button data-i="🚗" data-t="flow">Հոսք</button>
+  <button data-i="🚌" data-t="bus">Գծեր</button>
+  <button data-i="📍" data-t="pair">A → B</button>
+  <button data-i="👁" data-t="view">Տեսք</button>
+  <button data-i="📄" data-t="data">Տվյալներ</button>
  </nav>
  <div class="body">
   <section class="sec on" id="s-time">
@@ -224,6 +257,9 @@ th{color:var(--mute);font-weight:600}
  <div id="dsp"></div>
 </div>
 <div id="pairbar"></div>
+<div id="mbar"><button class="mb on" id="mplay" aria-label="Դադար/խաղարկել">❚❚</button><div class="mt"><b id="mclock">08:30</b><span id="mper"></span></div><button class="mb" id="mspd" aria-label="Արագություն">10×</button><button class="mb" id="mst" aria-label="Վիճակագրություն">📊</button></div>
+<div id="fab"><button class="pri" id="fab-ab" aria-label="Ընտրել A և B կետերը">📍</button><button id="fab-home" aria-label="Ամբողջ քաղաքը">⌂</button></div>
+<div id="mtoast"><span id="mtt"></span><button id="mtx" aria-label="Չեղարկել">✕</button></div>
 <div id="tip"></div>
 <div id="hint">© OpenStreetMap · սիմուլյացիա · <span class="num" id="fps"></span></div>
 
@@ -319,8 +355,9 @@ function posAt(L,s,lat,o){let k=0;const c=L.cum;if(s>=L.len)k=c.length-2;else{le
 
 // ================= THREE SCENE =================
 const canvas=$('c');
-const renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+const MOB=matchMedia('(max-width:760px)').matches;
+const renderer=new THREE.WebGLRenderer({canvas,antialias:!MOB,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,MOB?1.25:1.5));
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(45,1,4,60000);
 const flat=(m,o)=>{m.renderOrder=o;const ms=Array.isArray(m.material)?m.material:[m.material];ms.forEach(x=>{x.depthWrite=false;x.polygonOffset=true;x.polygonOffsetFactor=-o;x.polygonOffsetUnits=-o});return m};
@@ -738,7 +775,7 @@ const tip=$('tip');
 const VN={car:'Մեքենա',taxi:'Տաքսի',bus:'Ավտոբուս (առաջարկվող երթ.)',pcar:'Զույգի մեքենա',ptaxi:'Զույգի տաքսի',cbus:'Քաղաքային ավտոբուս',mini:'Միկրոավտոբուս',trol:'Տրոլեյբուս',van:'Վեն',truck:'Բեռնատար',block:'Կրկնակի կայանված մեքենա'};
 const CN=['Մայրուղի','Պողոտա','Փողոց (II)','Փողոց (III)','Միացում','Բնակելի','Բակային'];
 function linkInfo(L){const sp=L.vn?L.vs/L.vn*KMH:null;return `<b>${esc(L.E.name||CN[L.cls])}</b>${CN[L.cls]} · ${L.n} շարք · ${Math.round(L.spd*KMH)} կմ/ժ սահմանափակում${L.bus?(busToday.has(L.i)?'<br><span style="color:#3fd26e">● Գործող ավտոբուսային գիծ</span>':'<br><span style="color:#9d86ff">● Առաջարկվող ավտոբուսային գիծ</span>'):''}${L.imp&&routeLinkSet.has(L)?'<br>«Անհնարին» հատված':''}${L.park?'<br>Աջ շարքը՝ կայանված մեքենաներ':''}${sp!=null?'<br>Միջին արագություն՝ <span class="num">'+sp.toFixed(0)+' կմ/ժ</span>':''}`}
-function hover(e){const now=performance.now();if(now-hoverT<60)return;hoverT=now;const g=groundAt(e.clientX,e.clientY);if(!g){tip.style.display='none';return}
+function hover(e){if(MOB&&e.type==='pointermove')return;const now=performance.now();if(now-hoverT<60)return;hoverT=now;const g=groundAt(e.clientX,e.clientY);if(!g){tip.style.display='none';return}
  const v=cam.dist<2500?vehAt(g.x,g.z,6):null;let html='';
  if(v)html=vehInfo(v);else{const L=nearestLink(g.x,g.z,10);if(L&&cam.dist<5000)html=linkInfo(L)}
  if(pickMode)html=(pickMode===1?'Սեղմեք մեկնարկի կետը (A)':'Սեղմեք վերջնակետը (B)')+(html?'<br>'+html:'');
@@ -748,11 +785,12 @@ function click(e){const g=groundAt(e.clientX,e.clientY);if(!g)return;
  if(pickMode){const L=nearestLink(g.x,g.z,40,L=>L.cls<=5);if(!L){$('pickmsg').textContent='Մոտակայքում փողոց չկա, փորձեք կրկին։';return}
   if(pickMode===1){pickA=L;pickMode=2;setMk(abMk.A,L);setMk(abMk.B,null);$('pickmsg').textContent='A՝ '+(L.E.name||CN[L.cls])+'։ Հիմա ընտրեք B-ն։';return}
   setMk(abMk.B,L);runAB(pickA,L);return}
- const v=vehAt(g.x,g.z,8);sel=v;if(v){$('follow').checked=true;S.follow=true}
+ const v=vehAt(g.x,g.z,MOB?14:8);sel=v;if(v){$('follow').checked=true;S.follow=true}
+ if(MOB){hoverT=0;hover(e)}
 }
 
 function runAB(La,Lb){
- setMk(abMk.A,La);setMk(abMk.B,Lb);
+ setMk(abMk.A,La);setMk(abMk.B,Lb);setTimeout(()=>MUI.after(),0);
  const path=shortestPath(La,Lb,false);pickMode=0;$('pick').classList.remove('on');
  if(!path){$('pickmsg').textContent='Ուղի չգտնվեց (միակողմանի փողոց կամ կտրված ցանց), փորձեք այլ կետեր։';$('est').innerHTML='';return}
  const tpath=S.taxiBus?(shortestPath(La,Lb,true)||path):path;
@@ -777,6 +815,38 @@ function renderEst(){const el=$('est');if(!lastAB){el.innerHTML='';return}const 
  el.innerHTML=`<h3>Իրական կյանքում (գնահատական)</h3><div style="overflow-x:auto"><table><thead><tr><th></th><th>Մեքենա</th><th>Տաքսի*</th><th>Խնայում</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.n}</td><td class="num">${r.c.toFixed(0)} ր</td><td class="num">${r.t.toFixed(0)} ր</td><td class="num ${r.g>.5?'gain':''}">${r.g>.5?'−'+r.g.toFixed(0)+' ր ('+Math.round(r.g/r.c*100)+'%)':'≈0'}</td></tr>`).join('')}</tbody></table></div>
  <div class="ref"><div class="r"><span>Ավտոբուսի գծով հատված</span><b>${bl.toFixed(1)} կմ</b></div><div class="r"><span>Տարեկան խնայում (պիկին, 2 ուղևորություն × 250 աշխ. օր)</span><b>≈${yr.toFixed(0)} ժամ</b></div></div>
  <p class="note">* Տաքսի, որը կարող է օգտվել ավտոբուսի գծից։ Պիկ՝ 07:30–09:30 և 17:00–19:00, միջպիկ՝ 10:00–16:00, գիշեր՝ 22:00–06:00։ Հաշվարկը զեկույցի արագություններից է, ոչ թե սիմուլյացիայից. մեքենան պիկին՝ 10 կմ/ժ ծանրաբեռնված փողոցներում, 15 կմ/ժ Կենտրոնում, 20–23 կմ/ժ այլուր, միջպիկին ≈1,45 անգամ արագ, գիշերը՝ ազատ հոսք։ Տաքսին ավտոբուսի գծում ցանկացած ժամի ≈30 կմ/ժ է, ինչպես ոչ պիկային ժամին (առանձնացված գիծ + լուսացույցի առաջնահերթություն), մնացած հատվածներում՝ ինչպես մեքենան։ Գծերը՝ «${S.scen==='prop'?'Առաջարկ':'Այսօր'}» սցենարով (փոխվում է «Գծեր» ներդիրում)։</p>`}
+// ================= MOBILE =================
+const MUI=(()=>{if(!MOB)return{set(){},after(){}};
+ const P=$('panel'),root=document.documentElement;let st='peek';
+ const H=k=>k==='peek'?(P.querySelector('.tabs').offsetHeight+22):k==='half'?Math.round(innerHeight*.5):Math.round(innerHeight*.86);
+ const set=k=>{st=k;root.style.setProperty('--ph',H(k)+'px');P.dataset.st=k};
+ setTimeout(()=>set('peek'),0);addEventListener('resize',()=>set(st));
+ // tabs: tap opens; tapping the open tab closes
+ $('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(st==='peek')set('half');else if(b.dataset.was==='1')set('peek');$('tabs').querySelectorAll('button').forEach(x=>x.dataset.was=x===b?'1':'0')},true);
+ $('tabs').querySelector('.on').dataset.was='1';
+ // drag handle
+ const g=$('grab');let y0=null,h0=0,moved=0;
+ g.addEventListener('pointerdown',e=>{y0=e.clientY;h0=P.offsetHeight;moved=0;g.setPointerCapture(e.pointerId);P.classList.add('drag')});
+ g.addEventListener('pointermove',e=>{if(y0==null)return;const dy=y0-e.clientY;moved=Math.max(moved,Math.abs(dy));root.style.setProperty('--ph',Math.max(H('peek'),Math.min(innerHeight*.9,h0+dy))+'px')});
+ g.addEventListener('pointerup',e=>{P.classList.remove('drag');if(y0==null)return;const h=P.offsetHeight;y0=null;
+  if(moved<6){set(st==='peek'?'half':st==='half'?'full':'peek');return}
+  const c=['peek','half','full'].map(k=>[k,Math.abs(H(k)-h)]).sort((a,b)=>a[1]-b[1])[0][0];set(c)});
+ // top bar
+ $('mplay').onclick=()=>{$('play').click();$('mplay').textContent=S.play?'❚❚':'▶';$('mplay').classList.toggle('on',S.play)};
+ const spd=()=>$('mspd').textContent=S.speed+'×';spd();
+ $('mspd').onclick=()=>{const i=SPEEDS.indexOf(S.speed);S.speed=SPEEDS[(i+1)%SPEEDS.length];S.day24=false;$('day24').checked=false;syncSpeed();spd()};
+ $('speeds').addEventListener('click',()=>setTimeout(spd,0));
+ $('mst').onclick=()=>{document.body.classList.toggle('showstats');$('mst').classList.toggle('on')};
+ // FABs
+ const toast=(on,html)=>{$('mtoast').classList.toggle('on',on);if(html!=null)$('mtt').innerHTML=html};
+ $('fab-ab').onclick=()=>{$('pick').click()};
+ $('fab-home').onclick=()=>{const c=CAMS[0];S.follow=false;$('follow').checked=false;sel=null;fly={from:{...cam},to:{x:c[1],z:c[2],dist:c[3]*1.5,yaw:c[4],pitch:c[5]},t:0}};
+ $('mtx').onclick=()=>{if(pickMode)$('pick').click();toast(false)};
+ new MutationObserver(()=>{if(pickMode)toast(true,$('pickmsg').innerHTML)}).observe($('pickmsg'),{childList:true,subtree:true,characterData:true});
+ $('tip').addEventListener('click',()=>{$('tip').style.display='none'});
+ return{set,toast,pickStart(){set('peek');document.body.classList.remove('showstats');$('mst').classList.remove('on');$('fab-ab').classList.add('on');toast(true,'Հպեք քարտեզին՝ մեկնակետ <b>A</b>')},
+  pickEnd(){toast(false);$('fab-ab').classList.remove('on')},
+  after(){toast(false);$('fab-ab').classList.remove('on');document.querySelector('[data-t=pair]').click();set('half');setTimeout(()=>{const e=$('est');e&&e.scrollIntoView({block:'start',behavior:'smooth'})},250)}}})();
 // ================= UI =================
 const tabs=$('tabs');tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('on',s.id==='s-'+b.dataset.t))});
 $('minb').onclick=()=>{const p=$('panel');p.classList.toggle('min');$('minb').textContent=p.classList.contains('min')?'+':'–'};
@@ -793,6 +863,7 @@ $('tod').oninput=e=>setTime(+e.target.value*60);
 $('day24').onchange=e=>{S.day24=e.target.checked;if(S.day24){S.speed=120;S.play=true;syncSpeed()}};
 function drawDemand(){const el=$('demand');if(!el)return;const pts=[];for(let i=0;i<=96;i++){const h=i/4;pts.push((i*3).toFixed(1)+','+(44-demand(h)*36).toFixed(1))}const pk=S.dens;el.innerHTML=`<polygon points="0,46 ${pts.join(' ')} 288,46" fill="rgba(255,204,51,.18)"/><polyline points="${pts.join(' ')}" fill="none" stroke="#ffcc33" stroke-width="1.5"/><text x="2" y="9" fill="#ffcc33" font-size="8">պիկ ≈${pk.toLocaleString('en')}</text><text x="2" y="42" fill="#93a0b4" font-size="7">գիշեր ≈${Math.round(pk*demand(3)).toLocaleString('en')}</text><line id="dmark" x1="0" x2="0" y1="0" y2="46" stroke="#fff" stroke-width="1.5"/>`}
 drawDemand();
+if(MOB){$('onroad').value=8}
 const bindR=(id,key,fmt,conv=x=>x,after)=>{const el=$(id);const f=()=>{S[key]=conv(+el.value);$('v-'+id).textContent=fmt(+el.value);after&&after()};el.oninput=f;f()};
 const fleet=()=>{S.dens=Math.round(S.fleet*.88*S.onroad*S.area);$('fleetcalc').textContent=S.dens.toLocaleString('en')+' մեքենա';$('fleet88').textContent=Math.round(S.fleet*.88).toLocaleString('en');drawDemand()};
 bindR('fleet','fleet',v=>Number(v).toLocaleString('en'),v=>v,fleet);
@@ -810,13 +881,13 @@ $('routes').onclick=e=>{const b=e.target.closest('[data-go]');if(!b)return;const
 $('pairroutes').innerHTML=routes.map(r=>`<div class="rt"><div class="t"><span class="sw" style="background:${r.color}"></span>Երթուղի ${r.num}</div><div class="m">${esc(r.name)}</div><div class="row">${r.dirs.map(d=>`<button class="btn" data-pr="${r.ri}" data-pd="${d.di}">${d.d} · ${(d.len/1000).toFixed(1)} կմ</button>`).join('')}</div></div>`).join('');
 $('pairroutes').onclick=e=>{const b=e.target.closest('[data-pr]');if(!b)return;const r=routes[+b.dataset.pr],d=r.dirs[+b.dataset.pd];const p=startPair(d.path,'Երթ. '+r.num+' '+d.d);sel=p.taxi;S.follow=true;$('follow').checked=true;cam.dist=Math.min(cam.dist,700)};
 $('pick2').onclick=()=>$('pick').click();
-$('pick').onclick=()=>{pickMode=pickMode?0:1;$('pick').classList.toggle('on',!!pickMode);$('pickmsg').textContent=pickMode?'Սեղմեք քարտեզի վրա մեկնարկի կետը (A)։':'';if(pickMode){setMk(abMk.A,null);setMk(abMk.B,null)}};
+$('pick').onclick=()=>{pickMode=pickMode?0:1;$('pick').classList.toggle('on',!!pickMode);$('pickmsg').textContent=pickMode?'Սեղմեք քարտեզի վրա մեկնարկի կետը (A)։':'';if(pickMode){setMk(abMk.A,null);setMk(abMk.B,null);MUI.pickStart&&MUI.pickStart()}else MUI.pickEnd&&MUI.pickEnd()};
 $('clr').onclick=()=>{setMk(abMk.A,null);setMk(abMk.B,null);lastAB=null;renderEst();$('pickmsg').textContent='';pairs.forEach(p=>{if(p.line)scene.remove(p.line);for(const k of ['car','taxi','bus'])if(p[k]&&!p[k].dead)removeVeh(p[k])});pairs.length=0;renderPairs()};
 const CAMS=[['Ամբողջը',300,600,15500,.35,1.0],['Կենտրոն',...districtCam('Kentron')],['Արաբկիր',...districtCam('Arabkir')],['Քանաքեռ-Զեյթուն',...districtCam('Kanaker-Zeytun')],['Մալաթիա-Սեբաստիա',...districtCam('Malatia-Sebastia')],['Նոր Նորք',...districtCam('Nor Nork')],['Նորք-Մարաշ',...districtCam('Nork-Marash')],['Շենգավիթ',...districtCam('Shengavit')],['Էրեբունի',...districtCam('Erebuni')],['Աջափնյակ',...districtCam('Ajapnyak')],['Ավան',...districtCam('Avan')],['Դավթաշեն',...districtCam('Davtashen')],['Նուբարաշեն',...districtCam('Nubarashen')],['Հանրապետության հր.',1000,180,700,.6,.75]];
 function districtCam(n){const d=districts.find(d=>d.n===n);return d?[d.cx,d.cz,2600,.35,.85]:[0,0,3000,.35,.85]}
 $('cams').innerHTML=CAMS.map((c,i)=>`<button class="btn" data-c="${i}">${c[0]}</button>`).join('');
 let fly=null;$('cams').onclick=e=>{const b=e.target.closest('button');if(!b)return;const c=CAMS[+b.dataset.c];S.follow=false;$('follow').checked=false;fly={from:{...cam},to:{x:c[1],z:c[2],dist:c[3],yaw:c[4],pitch:c[5]},t:0}};
-function flyToPath(path){let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;path.forEach(L=>{L.xs.forEach(x=>{x0=Math.min(x0,x);x1=Math.max(x1,x)});L.zs.forEach(z=>{z0=Math.min(z0,z);z1=Math.max(z1,z)})});fly={from:{...cam},to:{x:(x0+x1)/2,z:(z0+z1)/2,dist:Math.max(x1-x0,z1-z0)*1.3+500,yaw:cam.yaw,pitch:1.0},t:0}}
+function flyToPath(path){let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;path.forEach(L=>{L.xs.forEach(x=>{x0=Math.min(x0,x);x1=Math.max(x1,x)});L.zs.forEach(z=>{z0=Math.min(z0,z);z1=Math.max(z1,z)})});fly={from:{...cam},to:{x:(x0+x1)/2,z:(z0+z1)/2,dist:(Math.max(x1-x0,z1-z0)*1.3+500)*(MOB?1.7:1),yaw:cam.yaw,pitch:1.0},t:0}}
 const lay=(id,f)=>{$(id).onchange=e=>f(e.target.checked)};
 lay('l-bld',v=>bldMesh.visible=v);lay('l-acc',v=>S.accent=v);lay('l-rt',v=>routeMeshes.forEach((m,i)=>m.visible=v&&routes[i].show));lay('l-stop',v=>stopGroup.visible=v);lay('l-sig',v=>sigMesh.userData.group.visible=v);lay('l-dist',v=>distGroup.visible=v);lay('l-kml',v=>kmlGroup.visible=v);lay('l-cong',v=>{congOn=v;updateCongestion()});
 $('follow').onchange=e=>{S.follow=e.target.checked};
@@ -868,7 +939,7 @@ function renderData(){const D=window.REPORT,el=$('datatab');if(!D){el.textConten
 // ================= STATS =================
 const hist=[];let lastSample=0,lastHUD=0;
 function hud(){
- const h=(S.t%86400)/3600;$('clock').textContent=clockStr(S.t);$('period').textContent=period(h)+' · պահանջարկ '+Math.round(demand(h)*100)+'%';
+ const h=(S.t%86400)/3600;$('clock').textContent=clockStr(S.t);if(MOB){$('mclock').textContent=clockStr(S.t);$('mper').textContent=period(h)+' · '+(veh.length-count.block).toLocaleString('en')+' մեքենա'}$('period').textContent=period(h)+' · պահանջարկ '+Math.round(demand(h)*100)+'%';
  const dm=document.getElementById('dmark');if(dm){dm.setAttribute('x1',h/24*288);dm.setAttribute('x2',h/24*288)}
  if(document.activeElement!==$('tod'))$('tod').value=Math.floor((S.t%86400)/60);
  const CAT={car:'car',pcar:'car',taxi:'taxi',ptaxi:'taxi',bus:'bus',cbus:'bus',mini:'bus',trol:'bus',van:'fr',truck:'fr'};const sp={car:[0,0],taxi:[0,0],bus:[0,0],fr:[0,0]};for(const v of veh){const k=CAT[v.k];if(!k)continue;sp[k][0]+=v.v;sp[k][1]++}
